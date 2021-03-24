@@ -1,10 +1,22 @@
 import React from "react";
 
-function Tickets({ ticket, hideTicketsCounter, setHideTicketsCounter }) {
+function Tickets({
+	ticket,
+	hideTicketsCounter,
+	setHideTicketsCounter,
+	hiddenTickets,
+	setHiddenTickets,
+}) {
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
 		event.target.closest(".ticket").style.display = "none";
+		console.log(event.target.closest(".ticket"));
+
+		const newHiddenTickets = [...hiddenTickets];
+		newHiddenTickets.push(event.target.closest(".ticket"));
+
+		setHiddenTickets(newHiddenTickets);
 		setHideTicketsCounter(hideTicketsCounter + 1);
 	};
 

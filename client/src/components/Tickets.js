@@ -1,7 +1,13 @@
 import React from "react";
 import Ticket from "./Ticket";
 
-function Tickets({ tickets, hideTicketsCounter, setHideTicketsCounter }) {
+function Tickets({
+	tickets,
+	hideTicketsCounter,
+	setHideTicketsCounter,
+	hiddenTickets,
+	setHiddenTickets,
+}) {
 	return (
 		<div>
 			{tickets.map((ticket, i) => (
@@ -10,6 +16,8 @@ function Tickets({ tickets, hideTicketsCounter, setHideTicketsCounter }) {
 					ticket={ticket}
 					hideTicketsCounter={hideTicketsCounter}
 					setHideTicketsCounter={setHideTicketsCounter}
+					hiddenTickets={hiddenTickets}
+					setHiddenTickets={setHiddenTickets}
 				/>
 			))}
 		</div>

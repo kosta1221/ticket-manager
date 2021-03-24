@@ -6,6 +6,7 @@ import Tickets from "./components/Tickets";
 function App() {
 	const [resultsCount, setResultsCount] = useState(0);
 	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
+	const [hiddenTickets, setHiddenTickets] = useState([]);
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
 
@@ -28,8 +29,21 @@ function App() {
 		hiddenTicketsInfo.current.style.display = "inline";
 	}, [hideTicketsCounter]);
 
+	useEffect(() => {
+		for (const ticket of hiddenTickets) {
+			ticket.style.display = "none";
+		}
+	}, [hiddenTickets]);
+
 	const handleInputChange = (event) => {
 		setInput(event.target.value);
+	};
+
+	const handleRestoreHiddenClick = (event) => {
+		setHideTicketsCounter(0);
+		for (const ticket of hiddenTickets) {
+			ticket.style.display = "block";
+		}
 	};
 
 	return (
@@ -40,7 +54,10 @@ function App() {
 					<span>{`Showing ${resultsCount} results `}</span>
 					<span ref={hiddenTicketsInfo}>
 						{`(${hideTicketsCounter} hidden tickets - `}
-						<a href="#">restore</a>)
+						<a href="#" onClick={handleRestoreHiddenClick}>
+							restore
+						</a>
+						)
 					</span>
 				</p>
 			</section>
@@ -49,6 +66,8 @@ function App() {
 				setTickets={setTickets}
 				hideTicketsCounter={hideTicketsCounter}
 				setHideTicketsCounter={setHideTicketsCounter}
+				hiddenTickets={hiddenTickets}
+				setHiddenTickets={setHiddenTickets}
 			/>
 		</div>
 	);
