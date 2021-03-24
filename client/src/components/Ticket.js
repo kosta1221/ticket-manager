@@ -4,7 +4,7 @@ function Tickets({ ticket, hideTicketsCounter, setHideTicketsCounter }) {
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
-		event.target.display = "none";
+		event.target.closest(".ticket").style.display = "none";
 		setHideTicketsCounter(hideTicketsCounter + 1);
 	};
 
