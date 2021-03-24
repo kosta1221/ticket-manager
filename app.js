@@ -30,6 +30,16 @@ app.patch("/api/tickets/:ticketId/:state", (req, res) => {
 	const { ticketId } = req.params;
 	const { state } = req.params;
 
+	try {
+		if (state !== "done" && state !== "undone") {
+			const badStateParamError = new Error("param should be done or undone!");
+			badStateParamError.name = "BadStateParamError";
+			throw badStateParamError;
+		}
+	} catch (error) {
+		next(error);
+	}
+
 	Ticket.findById(ticketId)
 		.then((ticket) => {
 			ticket.updateOne({ done: !ticket.done }).then(() => {
@@ -37,8 +47,33 @@ app.patch("/api/tickets/:ticketId/:state", (req, res) => {
 			});
 		})
 		.catch((error) => {
-			console.log(error);
+			next(error);
 		});
 });
+
+const errorHandler = (error, request, response, next) => {
+	console.error(error);
+	console.error(error.message);
+
+	if (error.name === "CastError") {
+		return response.status(400).send({ message: "invalid id format!", name: "CastError" });
+	}
+
+	if (error.name === "ValidationError") {
+		return response.status(400).json({ message: error.message, name: "CastError" });
+	}
+
+	if (error.name === "MongoError") {
+		return response.status(400).json({ message: error.message, name: "CastError" });
+	}
+
+	if (error.name === "BadStateParamError") {
+		return response.status(400).json({ message: error.message, name: "CastError" });
+	}
+
+	next(error);
+};
+
+app.use(errorHandler);
 
 module.exports = app;
