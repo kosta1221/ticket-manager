@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,OAAO,CAAC;EACP,OAAO,EAAE,IAAI;CAUb;;AAXD,AAEC,OAFM,CAEN,CAAC,CAAC;EACD,UAAU,EAAE,IAAI;CAChB;;AAJF,AAKC,OALM,CAKN,aAAa,CAAC;EACb,OAAO,EAAE,QAAQ;EACjB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,aAAa;CAC9B;;ADRF,AAAA,IAAI,CAAC;EACJ,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,IAAI;CACf",
+    "sources": [
+        "App.scss",
+        "_Ticket.scss"
+    ],
+    "names": [],
+    "file": "App.css"
+}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import "./styles/App.css";
 import { fetchTickets } from "./utils";
 import Tickets from "./components/Tickets";
 
