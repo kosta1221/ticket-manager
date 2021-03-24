@@ -7,9 +7,19 @@ function Tickets({ ticket }) {
 		<div className="ticket">
 			<h1>{ticket.title}</h1>
 			<p>{ticket.content}</p>
-			<p>
-				By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
-			</p>
+			<section className="info-section">
+				<p>
+					By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
+				</p>
+
+				<p>
+					{ticket.labels.map((label, i) => (
+						<span key={`label-${i}`} className="label">
+							{`${label} `}
+						</span>
+					))}
+				</p>
+			</section>
 		</div>
 	);
 }
