@@ -42,8 +42,16 @@ app.patch("/api/tickets/:ticketId/:state", (req, res) => {
 
 	Ticket.findById(ticketId)
 		.then((ticket) => {
-			ticket.updateOne({ done: !ticket.done }).then(() => {
-				res.json({ updated: true });
+			let toUpdateOrNot = true;
+
+			if ((ticket.done && state === "done") || (!ticket.done && state === "undone")) {
+				toUpdateOrNot = false;
+			}
+
+			const updateValue = toUpdateOrNot ? !ticket.done : ticket.done;
+
+			ticket.updateOne({ done: updateValue }).then(() => {
+				res.json({ updated: toUpdateOrNot });
 			});
 		})
 		.catch((error) => {
