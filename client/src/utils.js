@@ -10,7 +10,7 @@ export const fetchTickets = async (tickets, setTickets) => {
 			url: `${URL}/tickets/`,
 			headers: { "Content-Type": "application/json" },
 		});
-		setTickets({ tickets: response.data.tickets });
+		setTickets(response.data);
 	} catch (e) {
 		console.log(e);
 	}
