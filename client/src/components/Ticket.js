@@ -1,11 +1,19 @@
 import React from "react";
 
-function Tickets({ ticket }) {
+function Tickets({ ticket, hideTicketsCounter, setHideTicketsCounter }) {
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
+
+	const handleHideTicketClick = (event) => {
+		event.target.display = "none";
+		setHideTicketsCounter(hideTicketsCounter + 1);
+	};
 
 	return (
 		<div className="ticket">
-			<h1>{ticket.title}</h1>
+			<button className="hideTicketButton" onClick={handleHideTicketClick}>
+				Hide
+			</button>
+			<h2>{ticket.title}</h2>
 			<p>{ticket.content}</p>
 			<section className="info-section">
 				<p>
