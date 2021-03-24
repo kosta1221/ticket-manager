@@ -1,10 +1,25 @@
 .ticket {
 	padding: 0 5%;
+	margin: 2vmax auto;
+	position: relative;
+	text-align: left;
+
+	.hideTicketButton {
+		position: absolute;
+		top: 2%;
+		left: 88.5%;
+	}
+
+	h2 {
+		margin-top: 0;
+		padding-right: 10%;
+	}
+
 	p {
 		text-align: left;
 	}
 	.info-section {
-		padding: 0 7% 0 0;
+		padding: 0 5% 0 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

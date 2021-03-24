@@ -1,5 +1,19 @@
 .ticket {
   padding: 0 5%;
+  margin: 2vmax auto;
+  position: relative;
+  text-align: left;
+}
+
+.ticket .hideTicketButton {
+  position: absolute;
+  top: 2%;
+  left: 88.5%;
+}
+
+.ticket h2 {
+  margin-top: 0;
+  padding-right: 10%;
 }
 
 .ticket p {
@@ -7,7 +21,7 @@
 }
 
 .ticket .info-section {
-  padding: 0 7% 0 0;
+  padding: 0 5% 0 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -22,5 +36,11 @@
 .App {
   text-align: center;
   font-size: 16px;
+}
+
+.App #searchInput {
+  margin-top: 2vmax;
+  width: 60%;
+  height: 3vmax;
 }
 /*# sourceMappingURL=App.css.map */
