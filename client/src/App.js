@@ -1,15 +1,32 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
 import { fetchTickets } from "./utils";
 import Tickets from "./components/Tickets";
 
 function App() {
+	const [resultsCount, setResultsCount] = useState(0);
+	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
+
+	const hiddenTicketsInfo = useRef(null);
 
 	useEffect(() => {
 		fetchTickets(tickets, setTickets, input);
 	}, [input]);
+
+	useEffect(() => {
+		setResultsCount(tickets.length);
+	}, [tickets]);
+
+	useEffect(() => {
+		if (hideTicketsCounter === 0) {
+			hiddenTicketsInfo.current.style.display = "none";
+			return;
+		}
+
+		hiddenTicketsInfo.current.style.display = "inline";
+	}, [hideTicketsCounter]);
 
 	const handleInputChange = (event) => {
 		setInput(event.target.value);
@@ -18,7 +35,21 @@ function App() {
 	return (
 		<div className="App">
 			<input id="searchInput" placeholder="Search..." onChange={handleInputChange} />
-			<Tickets tickets={tickets} setTickets={setTickets} />
+			<section className="results-info-section">
+				<p>
+					<span>{`Showing ${resultsCount} results `}</span>
+					<span ref={hiddenTicketsInfo}>
+						{`(${hideTicketsCounter} hidden tickets - `}
+						<a href="#">restore</a>)
+					</span>
+				</p>
+			</section>
+			<Tickets
+				tickets={tickets}
+				setTickets={setTickets}
+				hideTicketsCounter={hideTicketsCounter}
+				setHideTicketsCounter={setHideTicketsCounter}
+			/>
 		</div>
 	);
 }

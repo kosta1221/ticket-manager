@@ -1,11 +1,16 @@
 import React from "react";
 import Ticket from "./Ticket";
 
-function Tickets({ tickets }) {
+function Tickets({ tickets, hideTicketsCounter, setHideTicketsCounter }) {
 	return (
 		<div>
 			{tickets.map((ticket, i) => (
-				<Ticket key={`ticket-${i}`} ticket={ticket} />
+				<Ticket
+					key={`ticket-${i}`}
+					ticket={ticket}
+					hideTicketsCounter={hideTicketsCounter}
+					setHideTicketsCounter={setHideTicketsCounter}
+				/>
 			))}
 		</div>
 	);
