@@ -10,15 +10,18 @@ function Tickets({
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
-		event.target.closest(".ticket").style.display = "none";
-		console.log(event.target.closest(".ticket"));
+		const ticketElement = event.target.closest(".ticket");
+		ticketElement.style.display = "none";
+		ticketElement.classList.remove("ticket");
 
 		const newHiddenTickets = [...hiddenTickets];
-		newHiddenTickets.push(event.target.closest(".ticket"));
+		newHiddenTickets.push(ticketElement);
 
 		setHiddenTickets(newHiddenTickets);
 		setHideTicketsCounter(hideTicketsCounter + 1);
 	};
+
+	const labelArray = ticket.labels ? ticket.labels : [];
 
 	return (
 		<div className="ticket">
@@ -33,9 +36,9 @@ function Tickets({
 				</p>
 
 				<p>
-					{ticket.labels.map((label, i) => (
+					{labelArray.map((label, i) => (
 						<span key={`label-${i}`} className="label">
-							{`${label} `}
+							{label}
 						</span>
 					))}
 				</p>

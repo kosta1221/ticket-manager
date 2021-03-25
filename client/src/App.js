@@ -43,6 +43,7 @@ function App() {
 		setHideTicketsCounter(0);
 		for (const ticket of hiddenTickets) {
 			ticket.style.display = "block";
+			ticket.classList.add("ticket");
 		}
 	};
 
@@ -53,8 +54,10 @@ function App() {
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
 					<span ref={hiddenTicketsInfo}>
-						{`(${hideTicketsCounter} hidden tickets - `}
-						<a href="#" onClick={handleRestoreHiddenClick}>
+						{`(`}
+						<span id="hideTicketsCounter">{hideTicketsCounter}</span>
+						{` hidden tickets - `}
+						<a id="restoreHideTickets" href="#" onClick={handleRestoreHiddenClick}>
 							restore
 						</a>
 						)

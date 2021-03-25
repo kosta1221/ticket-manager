@@ -40,9 +40,9 @@ const projectName = '1.Ticket Manager UI';
 describe(projectName, () => {
   beforeAll(async () => {
     browser = await puppeteer.launch({
-        headless: false,
+        headless: true,
         args: ["--disable-web-security"],
-        slowMo: 50,
+        slowMo: 0,
       });
     page = await browser.newPage();
     useNock(page, ['http://localhost:3000/api']);
