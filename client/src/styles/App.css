@@ -3,7 +3,7 @@
   margin: 2vmax 7%;
   position: relative;
   text-align: left;
-  background: white;
+  background-color: #f6f5d7 !important;
 }
 
 .ticket .hideTicketButton {
@@ -42,9 +42,8 @@
   background: linear-gradient(90.5deg, #fcb045 0%, #f3f463 100%);
 }
 
-.App #searchInput {
-  margin-top: 2vmax;
+.App .MuiFormControl-root {
   width: 60%;
-  height: 3vmax;
+  margin-top: 2vmax;
 }
 /*# sourceMappingURL=App.css.map */

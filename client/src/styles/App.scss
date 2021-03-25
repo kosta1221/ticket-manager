@@ -7,9 +7,8 @@
 	padding-bottom: 0.2vh;
 	background: linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%);
 
-	#searchInput {
-		margin-top: 2vmax;
+	.MuiFormControl-root {
 		width: 60%;
-		height: 3vmax;
+		margin-top: 2vmax;
 	}
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
 import { fetchTickets } from "./utils";
-import { Button } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 
 function App() {
@@ -50,7 +50,13 @@ function App() {
 
 	return (
 		<div className="App">
-			<input id="searchInput" placeholder="Search..." onChange={handleInputChange} />
+			<TextField
+				id="searchInput"
+				placeholder="Search..."
+				label="Search"
+				variant="outlined"
+				onChange={handleInputChange}
+			/>
 			<section className="results-info-section">
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
