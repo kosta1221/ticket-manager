@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
 import { fetchTickets } from "./utils";
-import { Button, TextField } from "@material-ui/core";
+import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import { Button, TextField, Fab, useScrollTrigger } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 import SearchAppBar from "./components/SearchAppBar";
+import ScrollTop from "./components/ScrollTop";
 
 function App() {
 	const [resultsCount, setResultsCount] = useState(0);
@@ -48,7 +50,7 @@ function App() {
 	return (
 		<div className="App">
 			<SearchAppBar setInput={setInput} />
-			<section className="results-info-section">
+			<section className="results-info-section" id="back-to-top-anchor">
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
 					<span ref={hiddenTicketsInfo}>
@@ -70,6 +72,11 @@ function App() {
 				hiddenTickets={hiddenTickets}
 				setHiddenTickets={setHiddenTickets}
 			/>
+			<ScrollTop>
+				<Fab color="secondary" size="small" aria-label="scroll back to top">
+					<KeyboardArrowUpIcon />
+				</Fab>
+			</ScrollTop>
 		</div>
 	);
 }
