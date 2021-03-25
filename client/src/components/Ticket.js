@@ -1,4 +1,5 @@
 import React from "react";
+import { Button, Card } from "@material-ui/core";
 
 function Tickets({
 	ticket,
@@ -24,10 +25,10 @@ function Tickets({
 	const labelArray = ticket.labels ? ticket.labels : [];
 
 	return (
-		<div className="ticket">
-			<button className="hideTicketButton" onClick={handleHideTicketClick}>
+		<Card className="ticket" elevation={6}>
+			<Button className="hideTicketButton" onClick={handleHideTicketClick}>
 				Hide
-			</button>
+			</Button>
 			<h2>{ticket.title}</h2>
 			<p>{ticket.content}</p>
 			<section className="info-section">
@@ -43,7 +44,7 @@ function Tickets({
 					))}
 				</p>
 			</section>
-		</div>
+		</Card>
 	);
 }
 

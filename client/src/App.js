@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
 import { fetchTickets } from "./utils";
+import { Button } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 
 function App() {

@@ -3,6 +3,9 @@
 .App {
 	text-align: center;
 	font-size: 16px;
+	min-height: 100vh;
+	padding-bottom: 0.2vh;
+	background: linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%);
 
 	#searchInput {
 		margin-top: 2vmax;
