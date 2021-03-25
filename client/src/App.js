@@ -3,6 +3,7 @@ import "./styles/App.css";
 import { fetchTickets } from "./utils";
 import { Button, TextField } from "@material-ui/core";
 import Tickets from "./components/Tickets";
+import SearchAppBar from "./components/SearchAppBar";
 
 function App() {
 	const [resultsCount, setResultsCount] = useState(0);
@@ -36,10 +37,6 @@ function App() {
 		}
 	}, [hiddenTickets]);
 
-	const handleInputChange = (event) => {
-		setInput(event.target.value);
-	};
-
 	const handleRestoreHiddenClick = (event) => {
 		setHideTicketsCounter(0);
 		for (const ticket of hiddenTickets) {
@@ -50,13 +47,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<TextField
-				id="searchInput"
-				placeholder="Search..."
-				label="Search"
-				variant="outlined"
-				onChange={handleInputChange}
-			/>
+			<SearchAppBar setInput={setInput} />
 			<section className="results-info-section">
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
