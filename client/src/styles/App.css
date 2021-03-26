@@ -50,7 +50,8 @@
 
 .ticket .info-section .label {
   margin-right: 7%;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
+  text-transform: none;
 }
 
 .App {
