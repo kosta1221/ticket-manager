@@ -59,6 +59,21 @@ app.patch("/api/tickets/:ticketId/:state", (req, res) => {
 		});
 });
 
+// POST route to /api/tickets/new to add a new ticket
+app.post("/api/tickets/new", (req, res) => {
+	const { body } = req;
+
+	const creationTime = Date.now();
+	const newTicket = { ...body, creationTime };
+
+	try {
+		Ticket.create(newTicket);
+		res.status(201).json(newTicket);
+	} catch (error) {
+		next(error);
+	}
+});
+
 const errorHandler = (error, request, response, next) => {
 	console.error(error);
 	console.error(error.message);
