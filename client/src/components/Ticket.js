@@ -37,13 +37,19 @@ function Tickets({
 						By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
 					</p>
 
-					<p>
+					<div>
 						{labelArray.map((label, i) => (
-							<span key={`label-${i}`} className="label">
+							<Button
+								key={`label-${i}`}
+								className="label"
+								variant="outlined"
+								size="small"
+								color="primary"
+							>
 								{label}
-							</span>
+							</Button>
 						))}
-					</p>
+					</div>
 				</section>
 			</CardContent>
 		</Card>

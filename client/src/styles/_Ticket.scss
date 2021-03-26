@@ -24,5 +24,20 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+
+		p {
+			font-size: 0.85rem;
+			color: grey;
+		}
+
+		div {
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		.label {
+			margin-right: 7%;
+			font-size: 0.75rem;
+		}
 	}
 }

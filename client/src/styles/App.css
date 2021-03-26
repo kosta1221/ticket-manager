@@ -34,6 +34,25 @@
           justify-content: space-between;
 }
 
+.ticket .info-section p {
+  font-size: 0.85rem;
+  color: grey;
+}
+
+.ticket .info-section div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+.ticket .info-section .label {
+  margin-right: 7%;
+  font-size: 0.75rem;
+}
+
 .App {
   text-align: center;
   font-size: 16px;
