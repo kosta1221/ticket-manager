@@ -44,3 +44,14 @@
 		}
 	}
 }
+
+.done {
+	background-color: green !important;
+	color: white !important;
+
+	.info-section {
+		p {
+			color: white;
+		}
+	}
+}

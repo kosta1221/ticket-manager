@@ -43,7 +43,7 @@ function Ticket({
 
 	if (done) {
 		return (
-			<Card className="ticket" elevation={6} classes={{ root: "ticket" }}>
+			<Card className="ticket done" elevation={6}>
 				<CardContent>
 					<Button className="hideTicketButton" onClick={handleHideTicketClick}>
 						Hide
@@ -60,7 +60,7 @@ function Ticket({
 								<Button
 									key={`label-${i}`}
 									className="label"
-									variant="outlined"
+									variant="contained"
 									size="small"
 									color="primary"
 								>
@@ -82,7 +82,7 @@ function Ticket({
 		);
 	} else {
 		return (
-			<Card className="ticket" elevation={6} classes={{ root: "ticket" }}>
+			<Card className="ticket" elevation={6}>
 				<CardContent>
 					<Button className="hideTicketButton" onClick={handleHideTicketClick}>
 						Hide
