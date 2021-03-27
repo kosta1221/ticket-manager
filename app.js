@@ -66,28 +66,36 @@ app.post("/api/tickets/new", (req, res, next) => {
 	const { body } = req;
 
 	let { labels } = body;
+
 	if (!Array.isArray(labels) && typeof labels === "string") {
-		console.log("inside");
-		console.log(labels);
 		if (labels === "") {
-			console.log("inside 2");
 			body.labels = [];
 		} else {
-			console.log("inside 3");
-			// Remove non-alphaneumeric chars
 			labels = labels.replace(/[^ 0-9a-z]/gi, "");
 			// Make the string into an array seperated by spaces
 			body.labels = labels.split(" ").map((label) => capitalizeFirstLetter(label.toLowerCase()));
 		}
 	}
-	console.log(labels);
-	console.log(body);
+
 	const creationTime = Date.now();
 	const newTicket = { ...body, creationTime };
 
 	Ticket.create(newTicket)
 		.then(() => {
 			res.status(201).json(newTicket);
+		})
+		.catch((error) => {
+			next(error);
+		});
+});
+
+// DELETE route to /api/tickets/:ticketId to delete a ticket by it's id
+app.delete("/api/tickets/:ticketId", (req, res, next) => {
+	const { ticketId } = req.params;
+
+	Ticket.findByIdAndRemove(ticketId)
+		.then((deletedTicket) => {
+			res.json({ message: `ticket with id ${ticketId} deleted` });
 		})
 		.catch((error) => {
 			next(error);
