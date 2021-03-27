@@ -1,7 +1,9 @@
 import React from "react";
-import { Button, Card, CardContent } from "@material-ui/core";
+import { Button, Card, CardContent, IconButton, CardActions } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import CheckCircle from "@material-ui/icons/CheckCircle";
 
-function Tickets({
+function Ticket({
 	ticket,
 	hideTicketsCounter,
 	setHideTicketsCounter,
@@ -14,6 +16,7 @@ function Tickets({
 		const ticketElement = event.target.closest(".ticket");
 		ticketElement.style.display = "none";
 		ticketElement.classList.remove("ticket");
+		console.log(ticket);
 
 		const newHiddenTickets = [...hiddenTickets];
 		newHiddenTickets.push(ticketElement);
@@ -51,9 +54,17 @@ function Tickets({
 						))}
 					</div>
 				</section>
+				<CardActions disableSpacing>
+					<IconButton aria-label="delete ticket">
+						<DeleteIcon />
+					</IconButton>
+					<IconButton aria-label="mark as done">
+						<CheckCircle />
+					</IconButton>
+				</CardActions>
 			</CardContent>
 		</Card>
 	);
 }
 
-export default Tickets;
+export default Ticket;
