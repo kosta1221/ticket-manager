@@ -9,14 +9,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function AddTicketButton({ children }) {
+function AddTicketButton({ children, setAddFormOpen }) {
 	const classes = useStyles();
 
-	const handleClick = (event) => {};
+	const handleClickOpen = () => {
+		setAddFormOpen(true);
+	};
 
 	return (
 		<Zoom in={true}>
-			<div onClick={handleClick} role="presentation" className={classes.root}>
+			<div onClick={handleClickOpen} role="button" className={classes.root}>
 				{children}
 			</div>
 		</Zoom>
