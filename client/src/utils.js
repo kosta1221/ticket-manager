@@ -35,3 +35,30 @@ export const deleteTicket = async (ticketId, tickets, setTickets) => {
 		console.log(e);
 	}
 };
+
+export const toggleTicketDone = async (ticketId, done, setDone) => {
+	let doneWord = "done";
+
+	// If the ticket is done doneWord needs to be undone because it represents the wanted "new" state
+	if (done) {
+		doneWord = "undone";
+	}
+
+	console.log(`trying to patch ticket id ${ticketId} to become ${doneWord}...`);
+	console.log(`${URL}/tickets/${ticketId}/${doneWord}`);
+
+	try {
+		const response = await axios({
+			method: "PATCH",
+			url: `${URL}/tickets/${ticketId}/${doneWord}`,
+			headers: { "Content-Type": "application/json" },
+		});
+		console.log(response.data);
+		if (response.data.updated) {
+			setDone(!done);
+			console.log("All good! Ticket done state updated!");
+		}
+	} catch (e) {
+		console.log(e);
+	}
+};
