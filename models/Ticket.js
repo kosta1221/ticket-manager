@@ -8,7 +8,7 @@ const ticketSchema = new mongoose.Schema({
 	},
 	content: { type: String, minLength: 3, required: true },
 	userEmail: { type: String, minLength: 3, required: true },
-	done: { type: Boolean, required: true },
+	done: { type: Boolean, required: true, default: false },
 	creationTime: { type: Number, required: true },
 	labels: { type: Array, required: false },
 });
