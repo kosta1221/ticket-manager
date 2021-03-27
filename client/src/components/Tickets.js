@@ -3,6 +3,7 @@ import Ticket from "./Ticket";
 
 function Tickets({
 	tickets,
+	setTickets,
 	hideTicketsCounter,
 	setHideTicketsCounter,
 	hiddenTickets,
@@ -14,6 +15,8 @@ function Tickets({
 				<Ticket
 					key={`ticket-${i}`}
 					ticket={ticket}
+					tickets={tickets}
+					setTickets={setTickets}
 					hideTicketsCounter={hideTicketsCounter}
 					setHideTicketsCounter={setHideTicketsCounter}
 					hiddenTickets={hiddenTickets}

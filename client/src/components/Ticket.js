@@ -1,10 +1,13 @@
 import React from "react";
 import { Button, Card, CardContent, IconButton, CardActions } from "@material-ui/core";
+import { deleteTicket } from "../utils";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 
 function Ticket({
 	ticket,
+	tickets,
+	setTickets,
 	hideTicketsCounter,
 	setHideTicketsCounter,
 	hiddenTickets,
@@ -23,6 +26,10 @@ function Ticket({
 
 		setHiddenTickets(newHiddenTickets);
 		setHideTicketsCounter(hideTicketsCounter + 1);
+	};
+
+	const handleDeleteTicket = async (event) => {
+		await deleteTicket(ticket.id, tickets, setTickets);
 	};
 
 	const labelArray = ticket.labels ? ticket.labels : [];
@@ -55,7 +62,7 @@ function Ticket({
 					</div>
 				</section>
 				<CardActions disableSpacing>
-					<IconButton aria-label="delete ticket">
+					<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
 						<DeleteIcon />
 					</IconButton>
 					<IconButton aria-label="mark as done">
