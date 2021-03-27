@@ -2,10 +2,12 @@ import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
 import { fetchTickets } from "./utils";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import AddIcon from "@material-ui/icons/Add";
 import { Button, TextField, Fab, useScrollTrigger } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 import SearchAppBar from "./components/SearchAppBar";
 import ScrollTop from "./components/ScrollTop";
+import AddTicketButton from "./components/AddTicketButton";
 
 function App() {
 	const [resultsCount, setResultsCount] = useState(0);
@@ -72,6 +74,11 @@ function App() {
 				hiddenTickets={hiddenTickets}
 				setHiddenTickets={setHiddenTickets}
 			/>
+			<AddTicketButton>
+				<Fab size="small" color="secondary" aria-label="add">
+					<AddIcon />
+				</Fab>
+			</AddTicketButton>
 			<ScrollTop>
 				<Fab color="secondary" size="small" aria-label="scroll back to top">
 					<KeyboardArrowUpIcon />
