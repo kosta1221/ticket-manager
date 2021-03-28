@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,6 +12,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+
+import Drawer from "./Drawer";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -78,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SearchAppBar({ setInput, searchBy, setSearchBy }) {
 	const classes = useStyles();
 
+	// Set the initial state of the drawer to not show
+	const [drawerShowed, setDrawerShowed] = useState(false);
+
 	const handleInputChange = (event) => {
 		setInput(event.target.value);
 	};
@@ -86,14 +91,24 @@ export default function SearchAppBar({ setInput, searchBy, setSearchBy }) {
 		setSearchBy(event.target.value);
 	};
 
+	const toggleDrawer = (open) => (event) => {
+		if (event && event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
+			return;
+		}
+
+		setDrawerShowed(open);
+	};
+
 	return (
 		<div className={classes.root}>
 			<AppBar position="sticky" top={0}>
+				<Drawer drawerShowed={drawerShowed} setDrawerShowed={setDrawerShowed} />
 				<Toolbar>
 					<IconButton
 						edge="start"
 						className={classes.menuButton}
 						color="inherit"
+						onClick={toggleDrawer(true)}
 						aria-label="open drawer"
 					>
 						<MenuIcon />
