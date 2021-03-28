@@ -24,9 +24,12 @@ function Ticket({
 		ticketElement.classList.remove("ticket");
 		console.log(ticket);
 
-		const newHiddenTickets = [...hiddenTickets];
-		newHiddenTickets.push(ticketElement);
+		const newHiddenTickets = {
+			tickets: [...hiddenTickets.tickets, ticket],
+			ticketElements: [...hiddenTickets.ticketElements, ticketElement],
+		};
 
+		console.log(newHiddenTickets);
 		setHiddenTickets(newHiddenTickets);
 		setHideTicketsCounter(hideTicketsCounter + 1);
 	};

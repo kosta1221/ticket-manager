@@ -77,7 +77,12 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-export default function SearchAppBar({ setInput, searchBy, setSearchBy }) {
+export default function SearchAppBar({
+	setInput,
+	searchBy,
+	setSearchBy,
+	setTicketsToRenderKeyword,
+}) {
 	const classes = useStyles();
 
 	// Set the initial state of the drawer to not show
@@ -102,7 +107,11 @@ export default function SearchAppBar({ setInput, searchBy, setSearchBy }) {
 	return (
 		<div className={classes.root}>
 			<AppBar position="sticky" top={0}>
-				<Drawer drawerShowed={drawerShowed} setDrawerShowed={setDrawerShowed} />
+				<Drawer
+					drawerShowed={drawerShowed}
+					setDrawerShowed={setDrawerShowed}
+					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+				/>
 				<Toolbar>
 					<IconButton
 						edge="start"

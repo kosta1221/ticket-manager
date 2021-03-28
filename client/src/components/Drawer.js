@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 	},
 });
 
-function Drawer({ drawerShowed, setDrawerShowed }) {
+function Drawer({ drawerShowed, setDrawerShowed, setTicketsToRenderKeyword }) {
 	const classes = useStyles();
 
 	const toggleDrawer = (open) => (event) => {
@@ -40,7 +40,14 @@ function Drawer({ drawerShowed, setDrawerShowed }) {
 		>
 			<List>
 				{["All Tickets", "Done", "Undone"].map((text, index) => (
-					<ListItem button key={text}>
+					<ListItem
+						button
+						key={text}
+						onClick={() => {
+							console.log(["all", "done", "undone"][index]);
+							setTicketsToRenderKeyword(["all", "done", "undone"][index]);
+						}}
+					>
 						<ListItemIcon>
 							{index % 3 === 0 ? (
 								<InboxIcon />
@@ -57,7 +64,13 @@ function Drawer({ drawerShowed, setDrawerShowed }) {
 			<Divider />
 			<List>
 				{["Hidden Tickets"].map((text, index) => (
-					<ListItem button key={text}>
+					<ListItem
+						button
+						key={text}
+						onClick={() => {
+							setTicketsToRenderKeyword("hidden");
+						}}
+					>
 						<ListItemIcon>{<VisibilityOffIcon />}</ListItemIcon>
 						<ListItemText primary={text} />
 					</ListItem>

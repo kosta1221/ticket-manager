@@ -13,11 +13,14 @@ function App() {
 
 	const [resultsCount, setResultsCount] = useState(0);
 	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
-	const [hiddenTickets, setHiddenTickets] = useState([]);
+	const [hiddenTickets, setHiddenTickets] = useState({ tickets: [], ticketElements: [] });
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
 
 	const [searchBy, setSearchBy] = useState("title");
+
+	// "all" for rendering all tickets, "done" for done, "undone" for undone, "hidden" for hidden.
+	const [ticketsToRenderKeyword, setTicketsToRenderKeyword] = useState("all");
 
 	const hiddenTicketsInfo = useRef(null);
 
@@ -39,14 +42,14 @@ function App() {
 	}, [hideTicketsCounter]);
 
 	useEffect(() => {
-		for (const ticket of hiddenTickets) {
-			ticket.style.display = "none";
+		for (const ticketElement of hiddenTickets.ticketElements) {
+			ticketElement.style.display = "none";
 		}
 	}, [hiddenTickets]);
 
 	const handleRestoreHiddenClick = (event) => {
 		setHideTicketsCounter(0);
-		for (const ticket of hiddenTickets) {
+		for (const ticket of hiddenTickets.ticketElements) {
 			ticket.style.display = "block";
 			ticket.classList.add("ticket");
 		}
@@ -54,7 +57,12 @@ function App() {
 
 	return (
 		<div className="App">
-			<SearchAppBar setInput={setInput} searchBy={searchBy} setSearchBy={setSearchBy} />
+			<SearchAppBar
+				setInput={setInput}
+				searchBy={searchBy}
+				setSearchBy={setSearchBy}
+				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+			/>
 			<section className="results-info-section" id="back-to-top-anchor">
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
@@ -76,6 +84,8 @@ function App() {
 				setHideTicketsCounter={setHideTicketsCounter}
 				hiddenTickets={hiddenTickets}
 				setHiddenTickets={setHiddenTickets}
+				ticketsToRenderKeyword={ticketsToRenderKeyword}
+				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
 			/>
 
 			<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
