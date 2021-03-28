@@ -22,8 +22,8 @@ function App() {
 	const hiddenTicketsInfo = useRef(null);
 
 	useEffect(() => {
-		fetchTickets(tickets, setTickets, input);
-	}, [input]);
+		fetchTickets(tickets, setTickets, input, searchBy);
+	}, [input, searchBy]);
 
 	useEffect(() => {
 		setResultsCount(tickets.length);

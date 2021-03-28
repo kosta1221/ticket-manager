@@ -15,10 +15,23 @@ app.use(morgan(":method :url :status :res[content-length] - :response-time ms :r
 // GET route to /api/tickets - returns an array of all tickets in the collection tickets in database.
 app.get("/api/tickets", (req, res, next) => {
 	const searchText = req.query.searchText;
+	let propToSearchBy = req.query.searchBy;
+
+	if (
+		propToSearchBy !== "title" &&
+		propToSearchBy !== "content" &&
+		propToSearchBy !== "userEmail"
+	) {
+		// default
+		propToSearchBy = "title";
+	}
+	console.log(propToSearchBy);
 
 	const searchTextRegex = new RegExp(searchText, "i");
+	const query = {};
+	query[propToSearchBy] = searchTextRegex;
 
-	Ticket.find({ title: searchTextRegex })
+	Ticket.find(query)
 		.then((tickets) => {
 			res.json(tickets);
 		})

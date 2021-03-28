@@ -1,13 +1,16 @@
 import axios from "axios";
 export const URL = `/api`;
 
-export const fetchTickets = async (tickets, setTickets, inputValue) => {
+export const fetchTickets = async (tickets, setTickets, inputValue, searchBy) => {
+	let urlToFetch = `${URL}/tickets?searchText=${inputValue}&searchBy=${searchBy}`;
+
 	console.log("trying to fetch...");
-	let urlToFetch = `${URL}/tickets?searchText=${inputValue}`;
 	if (!inputValue) {
-		console.log(`${URL}/tickets`);
 		urlToFetch = `${URL}/tickets`;
-	} else console.log(`${URL}/tickets?searchText=${inputValue}`);
+	}
+
+	console.log(urlToFetch);
+
 	try {
 		const response = await axios({
 			method: "GET",
