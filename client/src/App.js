@@ -33,6 +33,14 @@ function App() {
 	}, [tickets]);
 
 	useEffect(() => {
+		for (const ticketElement of hiddenTickets.ticketElements) {
+			if (ticketsToRenderKeyword !== "hidden") {
+				ticketElement.style.display = "block";
+			}
+		}
+	}, [ticketsToRenderKeyword]);
+
+	useEffect(() => {
 		if (hideTicketsCounter === 0) {
 			hiddenTicketsInfo.current.style.display = "none";
 			return;
@@ -43,15 +51,26 @@ function App() {
 
 	useEffect(() => {
 		for (const ticketElement of hiddenTickets.ticketElements) {
+			if (ticketsToRenderKeyword === "hidden") {
+				ticketElement.style.display = "block";
+				ticketElement.classList.add("ticket");
+				continue;
+			}
+
 			ticketElement.style.display = "none";
 		}
-	}, [hiddenTickets]);
+	}, [hiddenTickets, ticketsToRenderKeyword]);
 
 	const handleRestoreHiddenClick = (event) => {
 		setHideTicketsCounter(0);
-		for (const ticket of hiddenTickets.ticketElements) {
-			ticket.style.display = "block";
-			ticket.classList.add("ticket");
+		for (const ticketElement of hiddenTickets.ticketElements) {
+			if (ticketsToRenderKeyword === "hidden") {
+				ticketElement.style.display = "none";
+				ticketElement.classList.add("ticket");
+				continue;
+			}
+			ticketElement.style.display = "block";
+			ticketElement.classList.add("ticket");
 		}
 	};
 
