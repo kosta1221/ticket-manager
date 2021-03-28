@@ -8,6 +8,11 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+
 const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
@@ -65,13 +70,20 @@ const useStyles = makeStyles((theme) => ({
 			},
 		},
 	},
+	formControl: {
+		margin: theme.spacing(1),
+	},
 }));
 
-export default function SearchAppBar({ setInput }) {
+export default function SearchAppBar({ setInput, searchBy, setSearchBy }) {
 	const classes = useStyles();
 
 	const handleInputChange = (event) => {
 		setInput(event.target.value);
+	};
+
+	const handleSelectChange = (event) => {
+		setSearchBy(event.target.value);
 	};
 
 	return (
@@ -87,7 +99,7 @@ export default function SearchAppBar({ setInput }) {
 						<MenuIcon />
 					</IconButton>
 					<Typography className={classes.title} variant="h6" noWrap>
-						Ticket Manager
+						Kosta's Ticket Manager
 					</Typography>
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
@@ -105,6 +117,24 @@ export default function SearchAppBar({ setInput }) {
 							inputProps={{ "aria-label": "search" }}
 						/>
 					</div>
+					<FormControl className={classes.formControl}>
+						<InputLabel shrink id="demo-simple-select-placeholder-label-label">
+							Search By...
+						</InputLabel>
+						<Select
+							labelId="demo-simple-select-placeholder-label-label"
+							id="demo-simple-select-placeholder-label"
+							value={searchBy}
+							onChange={handleSelectChange}
+							displayEmpty
+						>
+							<MenuItem value="title">
+								<em>Title</em>
+							</MenuItem>
+							<MenuItem value={"content"}>Content</MenuItem>
+							<MenuItem value={"userEmail"}>Author's E-mail</MenuItem>
+						</Select>
+					</FormControl>
 				</Toolbar>
 			</AppBar>
 		</div>

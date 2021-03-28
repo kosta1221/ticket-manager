@@ -8,7 +8,18 @@
 	background: linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%);
 
 	.MuiFormControl-root {
-		width: 60%;
-		margin-top: 2vmax;
+		min-width: 15%;
+		margin-top: 0;
+		margin-left: 3vw;
+		margin-right: 0;
+
+		label {
+			color: lightgrey;
+			font-size: 0.85rem;
+		}
+
+		div {
+			color: white;
+		}
 	}
 }

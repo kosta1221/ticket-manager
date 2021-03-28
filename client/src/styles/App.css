@@ -74,7 +74,18 @@
 }
 
 .App .MuiFormControl-root {
-  width: 60%;
-  margin-top: 2vmax;
+  min-width: 15%;
+  margin-top: 0;
+  margin-left: 3vw;
+  margin-right: 0;
+}
+
+.App .MuiFormControl-root label {
+  color: lightgrey;
+  font-size: 0.85rem;
+}
+
+.App .MuiFormControl-root div {
+  color: white;
 }
 /*# sourceMappingURL=App.css.map */

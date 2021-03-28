@@ -17,6 +17,8 @@ function App() {
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
 
+	const [searchBy, setSearchBy] = useState("title");
+
 	const hiddenTicketsInfo = useRef(null);
 
 	useEffect(() => {
@@ -52,7 +54,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<SearchAppBar setInput={setInput} />
+			<SearchAppBar setInput={setInput} searchBy={searchBy} setSearchBy={setSearchBy} />
 			<section className="results-info-section" id="back-to-top-anchor">
 				<p>
 					<span>{`Showing ${resultsCount} results `}</span>
