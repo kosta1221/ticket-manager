@@ -18,6 +18,7 @@ export const fetchTickets = async (tickets, setTickets, inputValue, searchBy) =>
 			headers: { "Content-Type": "application/json" },
 		});
 		setTickets(response.data);
+		return response.data;
 	} catch (e) {
 		console.log(e);
 	}
@@ -39,7 +40,7 @@ export const deleteTicket = async (ticketId, tickets, setTickets) => {
 	}
 };
 
-export const toggleTicketDone = async (ticketId, done, setDone) => {
+export const toggleTicketDone = async (ticketId, done, setDone, tickets, setTickets) => {
 	let doneWord = "done";
 
 	// If the ticket is done doneWord needs to be undone because it represents the wanted "new" state
@@ -61,6 +62,14 @@ export const toggleTicketDone = async (ticketId, done, setDone) => {
 			setDone(!done);
 			console.log("All good! Ticket done state updated!");
 		}
+
+		const newTickets = tickets.map((ticket) => {
+			if (ticket.id === ticketId) {
+				ticket.done = !done;
+			}
+			return ticket;
+		});
+		setTickets(newTickets);
 	} catch (e) {
 		console.log(e);
 	}

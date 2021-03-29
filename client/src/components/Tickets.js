@@ -10,17 +10,10 @@ function Tickets({
 	setHiddenTickets,
 	ticketsToRenderKeyword,
 	setTicketsToRenderKeyword,
+	ticketsToRender,
 }) {
-	let ticketsToRender = [...tickets];
-	if (ticketsToRenderKeyword === "done") {
-		ticketsToRender = ticketsToRender.filter((ticket) => ticket.done === true);
-	} else if (ticketsToRenderKeyword === "undone") {
-		ticketsToRender = ticketsToRender.filter((ticket) => ticket.done === false);
-	} else if (ticketsToRenderKeyword === "hidden") {
-		ticketsToRender = [...hiddenTickets.tickets];
-	}
 	console.log(ticketsToRenderKeyword);
-	console.log(ticketsToRender);
+	console.log(hiddenTickets.ticketElements);
 
 	return (
 		<div>

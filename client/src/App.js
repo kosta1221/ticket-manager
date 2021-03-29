@@ -16,6 +16,7 @@ function App() {
 	const [hiddenTickets, setHiddenTickets] = useState({ tickets: [], ticketElements: [] });
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
+	const [ticketsToRender, setTicketsToRender] = useState([]);
 
 	const [searchBy, setSearchBy] = useState("title");
 
@@ -29,8 +30,8 @@ function App() {
 	}, [input, searchBy]);
 
 	useEffect(() => {
-		setResultsCount(tickets.length);
-	}, [tickets]);
+		setResultsCount(ticketsToRender.length);
+	}, [ticketsToRender]);
 
 	useEffect(() => {
 		for (const ticketElement of hiddenTickets.ticketElements) {
@@ -38,7 +39,18 @@ function App() {
 				ticketElement.style.display = "block";
 			}
 		}
-	}, [ticketsToRenderKeyword]);
+
+		if (ticketsToRenderKeyword === "all") {
+			setTicketsToRender(tickets);
+		} else if (ticketsToRenderKeyword === "done") {
+			setTicketsToRender(tickets.filter((ticket) => ticket.done === true));
+		} else if (ticketsToRenderKeyword === "undone") {
+			setTicketsToRender(tickets.filter((ticket) => ticket.done === false));
+		} else if (ticketsToRenderKeyword === "hidden") {
+			setTicketsToRender([...hiddenTickets.tickets]);
+			// setTickets([...hiddenTickets.tickets]);
+		}
+	}, [ticketsToRenderKeyword, tickets]);
 
 	useEffect(() => {
 		if (hideTicketsCounter === 0) {
@@ -105,6 +117,7 @@ function App() {
 				setHiddenTickets={setHiddenTickets}
 				ticketsToRenderKeyword={ticketsToRenderKeyword}
 				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+				ticketsToRender={ticketsToRender}
 			/>
 
 			<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, CardContent, IconButton, CardActions } from "@material-ui/core";
 import { deleteTicket, toggleTicketDone } from "../utils";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -15,6 +15,10 @@ function Ticket({
 	setHiddenTickets,
 }) {
 	const [done, setDone] = useState(ticket.done);
+
+	useEffect(() => {
+		setDone(ticket.done);
+	}, [ticket]);
 
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
@@ -39,7 +43,7 @@ function Ticket({
 	};
 
 	const handleDoneToggle = async (event) => {
-		await toggleTicketDone(ticket.id, done, setDone);
+		await toggleTicketDone(ticket.id, done, setDone, tickets, setTickets);
 	};
 
 	const labelArray = ticket.labels ? ticket.labels : [];
