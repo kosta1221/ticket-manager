@@ -1,6 +1,8 @@
 import React from "react";
 import Ticket from "./Ticket";
 
+import Loader from "react-loader-spinner";
+
 function Tickets({
 	tickets,
 	setTickets,
@@ -11,28 +13,34 @@ function Tickets({
 	ticketsToRenderKeyword,
 	setTicketsToRenderKeyword,
 	ticketsToRender,
+	ticketsLoading,
+	setTicketsLoading,
 }) {
 	console.log(ticketsToRenderKeyword);
-	console.log(hiddenTickets);
+	console.log("hidden tickets: ", hiddenTickets);
 
-	return (
-		<div>
-			{ticketsToRender.map((ticket, i) => {
-				return (
-					<Ticket
-						key={`ticket-${i}`}
-						ticket={ticket}
-						tickets={tickets}
-						setTickets={setTickets}
-						hideTicketsCounter={hideTicketsCounter}
-						setHideTicketsCounter={setHideTicketsCounter}
-						hiddenTickets={hiddenTickets}
-						setHiddenTickets={setHiddenTickets}
-					/>
-				);
-			})}
-		</div>
-	);
+	if (ticketsLoading) {
+		return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;
+	} else {
+		return (
+			<div>
+				{ticketsToRender.map((ticket, i) => {
+					return (
+						<Ticket
+							key={`ticket-${i}`}
+							ticket={ticket}
+							tickets={tickets}
+							setTickets={setTickets}
+							hideTicketsCounter={hideTicketsCounter}
+							setHideTicketsCounter={setHideTicketsCounter}
+							hiddenTickets={hiddenTickets}
+							setHiddenTickets={setHiddenTickets}
+						/>
+					);
+				})}
+			</div>
+		);
+	}
 }
 
 export default Tickets;

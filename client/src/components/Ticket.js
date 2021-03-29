@@ -5,6 +5,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
 
+import Loader from "react-loader-spinner";
+
 function Ticket({
 	ticket,
 	tickets,
@@ -15,6 +17,7 @@ function Ticket({
 	setHiddenTickets,
 }) {
 	const [done, setDone] = useState(ticket.done);
+	const [ticketLoading, setTicketLoading] = useState(false);
 
 	useEffect(() => {
 		setDone(ticket.done);
@@ -23,8 +26,7 @@ function Ticket({
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
-		console.log("ticket to hide:");
-		console.log(ticket);
+		console.log("ticket to hide:", ticket);
 
 		const newHiddenTickets = [...hiddenTickets, ticket];
 
@@ -34,93 +36,105 @@ function Ticket({
 	};
 
 	const handleDeleteTicket = async (event) => {
+		setTicketLoading(true);
 		await deleteTicket(ticket.id, tickets, setTickets);
+		setTicketLoading(false);
 	};
 
 	const handleDoneToggle = async (event) => {
+		setTicketLoading(true);
 		await toggleTicketDone(ticket.id, done, setDone, tickets, setTickets);
+		setTicketLoading(false);
 	};
 
 	const labelArray = ticket.labels ? ticket.labels : [];
 
 	if (done) {
-		return (
-			<Card className="ticket done" elevation={6}>
-				<CardContent>
-					<Button className="hideTicketButton" onClick={handleHideTicketClick}>
-						Hide
-					</Button>
-					<h2>{ticket.title}</h2>
-					<p>{ticket.content}</p>
-					<section className="info-section">
-						<p>
-							By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
-						</p>
+		if (ticketLoading) {
+			return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;
+		} else {
+			return (
+				<Card className="ticket done" elevation={6}>
+					<CardContent>
+						<Button className="hideTicketButton" onClick={handleHideTicketClick}>
+							Hide
+						</Button>
+						<h2>{ticket.title}</h2>
+						<p>{ticket.content}</p>
+						<section className="info-section">
+							<p>
+								By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
+							</p>
 
-						<div>
-							{labelArray.map((label, i) => (
-								<Button
-									key={`label-${i}`}
-									className="label"
-									variant="contained"
-									size="small"
-									color="primary"
-								>
-									{label}
-								</Button>
-							))}
-						</div>
-					</section>
-					<CardActions disableSpacing>
-						<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
-							<DeleteIcon />
-						</IconButton>
-						<IconButton aria-label="mark as undone" onClick={handleDoneToggle}>
-							<MarkAsUndoneIcon />
-						</IconButton>
-					</CardActions>
-				</CardContent>
-			</Card>
-		);
+							<div>
+								{labelArray.map((label, i) => (
+									<Button
+										key={`label-${i}`}
+										className="label"
+										variant="contained"
+										size="small"
+										color="primary"
+									>
+										{label}
+									</Button>
+								))}
+							</div>
+						</section>
+						<CardActions disableSpacing>
+							<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
+								<DeleteIcon />
+							</IconButton>
+							<IconButton aria-label="mark as undone" onClick={handleDoneToggle}>
+								<MarkAsUndoneIcon />
+							</IconButton>
+						</CardActions>
+					</CardContent>
+				</Card>
+			);
+		}
 	} else {
-		return (
-			<Card className="ticket" elevation={6}>
-				<CardContent>
-					<Button className="hideTicketButton" onClick={handleHideTicketClick}>
-						Hide
-					</Button>
-					<h2>{ticket.title}</h2>
-					<p>{ticket.content}</p>
-					<section className="info-section">
-						<p>
-							By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
-						</p>
+		if (ticketLoading) {
+			return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;
+		} else {
+			return (
+				<Card className="ticket" elevation={6}>
+					<CardContent>
+						<Button className="hideTicketButton" onClick={handleHideTicketClick}>
+							Hide
+						</Button>
+						<h2>{ticket.title}</h2>
+						<p>{ticket.content}</p>
+						<section className="info-section">
+							<p>
+								By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
+							</p>
 
-						<div>
-							{labelArray.map((label, i) => (
-								<Button
-									key={`label-${i}`}
-									className="label"
-									variant="outlined"
-									size="small"
-									color="primary"
-								>
-									{label}
-								</Button>
-							))}
-						</div>
-					</section>
-					<CardActions disableSpacing>
-						<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
-							<DeleteIcon />
-						</IconButton>
-						<IconButton aria-label="mark as done" onClick={handleDoneToggle}>
-							<CheckCircle />
-						</IconButton>
-					</CardActions>
-				</CardContent>
-			</Card>
-		);
+							<div>
+								{labelArray.map((label, i) => (
+									<Button
+										key={`label-${i}`}
+										className="label"
+										variant="outlined"
+										size="small"
+										color="primary"
+									>
+										{label}
+									</Button>
+								))}
+							</div>
+						</section>
+						<CardActions disableSpacing>
+							<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
+								<DeleteIcon />
+							</IconButton>
+							<IconButton aria-label="mark as done" onClick={handleDoneToggle}>
+								<CheckCircle />
+							</IconButton>
+						</CardActions>
+					</CardContent>
+				</Card>
+			);
+		}
 	}
 }
 

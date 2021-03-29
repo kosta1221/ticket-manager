@@ -1,7 +1,7 @@
 import axios from "axios";
 export const URL = `/api`;
 
-export const fetchTickets = async (tickets, setTickets, inputValue, searchBy) => {
+export const fetchTickets = async (setTickets, inputValue, searchBy) => {
 	let urlToFetch = `${URL}/tickets?searchText=${inputValue}&searchBy=${searchBy}`;
 
 	console.log("trying to fetch...");

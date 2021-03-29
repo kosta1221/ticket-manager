@@ -1,5 +1,7 @@
-import { useEffect, useState, useRef } from "react";
 import "./styles/App.css";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+
+import { useEffect, useState, useRef } from "react";
 import { fetchTickets } from "./utils";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Fab } from "@material-ui/core";
@@ -22,11 +24,14 @@ function App() {
 
 	// "all" for rendering all tickets, "done" for done, "undone" for undone, "hidden" for hidden.
 	const [ticketsToRenderKeyword, setTicketsToRenderKeyword] = useState("all");
+	const [ticketsLoading, setTicketsLoading] = useState(true);
 
 	const hiddenTicketsInfo = useRef(null);
 
 	useEffect(() => {
-		fetchTickets(tickets, setTickets, input, searchBy);
+		fetchTickets(setTickets, input, searchBy).then(() => {
+			setTicketsLoading(false);
+		});
 	}, [input, searchBy]);
 
 	useEffect(() => {
@@ -96,6 +101,8 @@ function App() {
 				ticketsToRenderKeyword={ticketsToRenderKeyword}
 				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
 				ticketsToRender={ticketsToRender}
+				ticketsLoading={ticketsLoading}
+				setTicketsLoading={setTicketsLoading}
 			/>
 
 			<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
