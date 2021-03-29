@@ -36,7 +36,7 @@ function App() {
 
 	useEffect(() => {
 		setResultsCount(ticketsToRender.length);
-	}, [ticketsToRender]);
+	}, [ticketsToRender, hiddenTickets]);
 
 	useEffect(() => {
 		if (ticketsToRenderKeyword === "all") {
