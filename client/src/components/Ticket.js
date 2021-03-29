@@ -23,15 +23,10 @@ function Ticket({
 	const creationTime = new Date(ticket.creationTime).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
-		const ticketElement = event.target.closest(".ticket");
-		ticketElement.style.display = "none";
-		ticketElement.classList.remove("ticket");
+		console.log("ticket to hide:");
 		console.log(ticket);
 
-		const newHiddenTickets = {
-			tickets: [...hiddenTickets.tickets, ticket],
-			ticketElements: [...hiddenTickets.ticketElements, ticketElement],
-		};
+		const newHiddenTickets = [...hiddenTickets, ticket];
 
 		console.log(newHiddenTickets);
 		setHiddenTickets(newHiddenTickets);

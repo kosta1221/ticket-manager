@@ -13,7 +13,7 @@ function App() {
 
 	const [resultsCount, setResultsCount] = useState(0);
 	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
-	const [hiddenTickets, setHiddenTickets] = useState({ tickets: [], ticketElements: [] });
+	const [hiddenTickets, setHiddenTickets] = useState([]);
 	const [input, setInput] = useState("");
 	const [tickets, setTickets] = useState([]);
 	const [ticketsToRender, setTicketsToRender] = useState([]);
@@ -34,23 +34,20 @@ function App() {
 	}, [ticketsToRender]);
 
 	useEffect(() => {
-		for (const ticketElement of hiddenTickets.ticketElements) {
-			if (ticketsToRenderKeyword !== "hidden") {
-				ticketElement.style.display = "block";
-			}
-		}
-
 		if (ticketsToRenderKeyword === "all") {
-			setTicketsToRender(tickets);
+			setTicketsToRender(tickets.filter((ticket) => !hiddenTickets.includes(ticket)));
 		} else if (ticketsToRenderKeyword === "done") {
-			setTicketsToRender(tickets.filter((ticket) => ticket.done === true));
+			setTicketsToRender(
+				tickets.filter((ticket) => ticket.done === true && !hiddenTickets.includes(ticket))
+			);
 		} else if (ticketsToRenderKeyword === "undone") {
-			setTicketsToRender(tickets.filter((ticket) => ticket.done === false));
+			setTicketsToRender(
+				tickets.filter((ticket) => ticket.done === false && !hiddenTickets.includes(ticket))
+			);
 		} else if (ticketsToRenderKeyword === "hidden") {
-			setTicketsToRender([...hiddenTickets.tickets]);
-			// setTickets([...hiddenTickets.tickets]);
+			setTicketsToRender([...hiddenTickets]);
 		}
-	}, [ticketsToRenderKeyword, tickets]);
+	}, [ticketsToRenderKeyword, tickets, hiddenTickets]);
 
 	useEffect(() => {
 		if (hideTicketsCounter === 0) {
@@ -61,29 +58,10 @@ function App() {
 		hiddenTicketsInfo.current.style.display = "inline";
 	}, [hideTicketsCounter]);
 
-	useEffect(() => {
-		for (const ticketElement of hiddenTickets.ticketElements) {
-			if (ticketsToRenderKeyword === "hidden") {
-				ticketElement.style.display = "block";
-				ticketElement.classList.add("ticket");
-				continue;
-			}
-
-			ticketElement.style.display = "none";
-		}
-	}, [hiddenTickets, ticketsToRenderKeyword]);
-
 	const handleRestoreHiddenClick = (event) => {
 		setHideTicketsCounter(0);
-		for (const ticketElement of hiddenTickets.ticketElements) {
-			if (ticketsToRenderKeyword === "hidden") {
-				ticketElement.style.display = "none";
-				ticketElement.classList.add("ticket");
-				continue;
-			}
-			ticketElement.style.display = "block";
-			ticketElement.classList.add("ticket");
-		}
+
+		setHiddenTickets([]);
 	};
 
 	return (

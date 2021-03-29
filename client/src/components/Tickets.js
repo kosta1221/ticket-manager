@@ -13,7 +13,7 @@ function Tickets({
 	ticketsToRender,
 }) {
 	console.log(ticketsToRenderKeyword);
-	console.log(hiddenTickets.ticketElements);
+	console.log(hiddenTickets);
 
 	return (
 		<div>
