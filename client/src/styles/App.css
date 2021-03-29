@@ -9,7 +9,7 @@
 .ticket .hideTicketButton {
   position: absolute;
   top: 1.5vw;
-  left: 88.5%;
+  left: 94%;
 }
 
 .ticket h2 {
@@ -63,6 +63,42 @@
 
 .done .info-section p {
   color: white;
+}
+
+@media only screen and (max-width: 950px) {
+  .ticket .hideTicketButton {
+    left: 92.5%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .ticket .hideTicketButton {
+    left: 90.5%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .ticket .hideTicketButton {
+    left: 89%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .ticket .hideTicketButton {
+    left: 87%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .ticket .hideTicketButton {
+    left: 82.5%;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .ticket .hideTicketButton {
+    left: 76.5%;
+  }
 }
 
 .App {

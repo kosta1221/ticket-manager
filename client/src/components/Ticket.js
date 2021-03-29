@@ -6,6 +6,7 @@ import CheckCircle from "@material-ui/icons/CheckCircle";
 import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
 
 import Loader from "react-loader-spinner";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Ticket({
 	ticket,
@@ -56,9 +57,13 @@ function Ticket({
 			return (
 				<Card className="ticket done" elevation={6}>
 					<CardContent>
-						<Button className="hideTicketButton" onClick={handleHideTicketClick}>
-							Hide
-						</Button>
+						<IconButton
+							aria-label="hide ticket"
+							className="hideTicketButton"
+							onClick={handleHideTicketClick}
+						>
+							<VisibilityOffIcon />
+						</IconButton>
 						<h2>{ticket.title}</h2>
 						<p>{ticket.content}</p>
 						<section className="info-section">
@@ -99,9 +104,13 @@ function Ticket({
 			return (
 				<Card className="ticket" elevation={6}>
 					<CardContent>
-						<Button className="hideTicketButton" onClick={handleHideTicketClick}>
-							Hide
-						</Button>
+						<IconButton
+							aria-label="hide ticket"
+							className="hideTicketButton"
+							onClick={handleHideTicketClick}
+						>
+							<VisibilityOffIcon />
+						</IconButton>
 						<h2>{ticket.title}</h2>
 						<p>{ticket.content}</p>
 						<section className="info-section">
