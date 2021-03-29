@@ -10,6 +10,21 @@ import SearchAppBar from "./components/SearchAppBar";
 import ScrollTop from "./components/ScrollTop";
 import AddTicketForm from "./components/AddTicketForm";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+import { createMuiTheme } from "@material-ui/core/styles";
+import orange from "@material-ui/core/colors/amber";
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#006064",
+		},
+		secondary: {
+			main: "#d32f2f",
+		},
+	},
+});
+
 function App() {
 	const [addFormOpen, setAddFormOpen] = useState(false);
 
@@ -70,49 +85,51 @@ function App() {
 	};
 
 	return (
-		<div className="App">
-			<SearchAppBar
-				setInput={setInput}
-				searchBy={searchBy}
-				setSearchBy={setSearchBy}
-				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
-			/>
-			<section className="results-info-section" id="back-to-top-anchor">
-				<p>
-					<span>{`Showing ${resultsCount} results `}</span>
-					<span ref={hiddenTicketsInfo}>
-						{`(`}
-						<span id="hideTicketsCounter">{hideTicketsCounter}</span>
-						{` hidden tickets - `}
-						<a id="restoreHideTickets" href="#" onClick={handleRestoreHiddenClick}>
-							restore
-						</a>
-						)
-					</span>
-				</p>
-			</section>
-			<Tickets
-				tickets={tickets}
-				setTickets={setTickets}
-				hideTicketsCounter={hideTicketsCounter}
-				setHideTicketsCounter={setHideTicketsCounter}
-				hiddenTickets={hiddenTickets}
-				setHiddenTickets={setHiddenTickets}
-				ticketsToRenderKeyword={ticketsToRenderKeyword}
-				setTicketsToRenderKeyword={setTicketsToRenderKeyword}
-				ticketsToRender={ticketsToRender}
-				ticketsLoading={ticketsLoading}
-				setTicketsLoading={setTicketsLoading}
-			/>
+		<ThemeProvider theme={theme}>
+			<div className="App">
+				<SearchAppBar
+					setInput={setInput}
+					searchBy={searchBy}
+					setSearchBy={setSearchBy}
+					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+				/>
+				<section className="results-info-section" id="back-to-top-anchor">
+					<p>
+						<span>{`Showing ${resultsCount} results `}</span>
+						<span ref={hiddenTicketsInfo}>
+							{`(`}
+							<span id="hideTicketsCounter">{hideTicketsCounter}</span>
+							{` hidden tickets - `}
+							<a id="restoreHideTickets" href="#" onClick={handleRestoreHiddenClick}>
+								restore
+							</a>
+							)
+						</span>
+					</p>
+				</section>
+				<Tickets
+					tickets={tickets}
+					setTickets={setTickets}
+					hideTicketsCounter={hideTicketsCounter}
+					setHideTicketsCounter={setHideTicketsCounter}
+					hiddenTickets={hiddenTickets}
+					setHiddenTickets={setHiddenTickets}
+					ticketsToRenderKeyword={ticketsToRenderKeyword}
+					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+					ticketsToRender={ticketsToRender}
+					ticketsLoading={ticketsLoading}
+					setTicketsLoading={setTicketsLoading}
+				/>
 
-			<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
+				<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
 
-			<ScrollTop>
-				<Fab color="secondary" size="small" aria-label="scroll back to top">
-					<KeyboardArrowUpIcon />
-				</Fab>
-			</ScrollTop>
-		</div>
+				<ScrollTop>
+					<Fab color="primary" size="small" aria-label="scroll back to top">
+						<KeyboardArrowUpIcon />
+					</Fab>
+				</ScrollTop>
+			</div>
+		</ThemeProvider>
 	);
 }
 

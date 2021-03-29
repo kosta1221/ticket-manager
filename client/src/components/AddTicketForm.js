@@ -21,7 +21,7 @@ function AddTicketForm({ addFormOpen, setAddFormOpen }) {
 	return (
 		<div>
 			<AddTicketButton setAddFormOpen={setAddFormOpen}>
-				<Fab size="small" color="secondary" aria-label="add">
+				<Fab size="small" color="primary" aria-label="add">
 					<AddIcon />
 				</Fab>
 			</AddTicketButton>
