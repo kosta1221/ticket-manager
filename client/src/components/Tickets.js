@@ -35,6 +35,7 @@ function Tickets({
 							setHideTicketsCounter={setHideTicketsCounter}
 							hiddenTickets={hiddenTickets}
 							setHiddenTickets={setHiddenTickets}
+							ticketsToRenderKeyword={ticketsToRenderKeyword}
 						/>
 					);
 				})}

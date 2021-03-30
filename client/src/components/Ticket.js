@@ -5,8 +5,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
 
+import HideOrShowTicketButton from "./HideOrShowTicketButton";
+
 import Loader from "react-loader-spinner";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 function Ticket({
 	ticket,
@@ -16,6 +17,7 @@ function Ticket({
 	setHideTicketsCounter,
 	hiddenTickets,
 	setHiddenTickets,
+	ticketsToRenderKeyword,
 }) {
 	const [done, setDone] = useState(ticket.done);
 	const [ticketLoading, setTicketLoading] = useState(false);
@@ -34,6 +36,16 @@ function Ticket({
 		console.log(newHiddenTickets);
 		setHiddenTickets(newHiddenTickets);
 		setHideTicketsCounter(hideTicketsCounter + 1);
+	};
+
+	const handleShowTicketClick = (event) => {
+		console.log("ticket to show:", ticket);
+
+		const newHiddenTickets = hiddenTickets.filter((hiddenTicket) => hiddenTicket.id !== ticket.id);
+
+		console.log(newHiddenTickets);
+		setHiddenTickets(newHiddenTickets);
+		setHideTicketsCounter(hideTicketsCounter - 1);
 	};
 
 	const handleDeleteTicket = async (event) => {
@@ -57,13 +69,11 @@ function Ticket({
 			return (
 				<Card className="ticket done" elevation={6}>
 					<CardContent>
-						<IconButton
-							aria-label="hide ticket"
-							className="hideTicketButton"
-							onClick={handleHideTicketClick}
-						>
-							<VisibilityOffIcon />
-						</IconButton>
+						<HideOrShowTicketButton
+							ticketsToRenderKeyword={ticketsToRenderKeyword}
+							handleHideTicketClick={handleHideTicketClick}
+							handleShowTicketClick={handleShowTicketClick}
+						/>
 						<h2>{ticket.title}</h2>
 						<p>{ticket.content}</p>
 						<section className="info-section">
@@ -104,13 +114,11 @@ function Ticket({
 			return (
 				<Card className="ticket" elevation={6}>
 					<CardContent>
-						<IconButton
-							aria-label="hide ticket"
-							className="hideTicketButton"
-							onClick={handleHideTicketClick}
-						>
-							<VisibilityOffIcon />
-						</IconButton>
+						<HideOrShowTicketButton
+							ticketsToRenderKeyword={ticketsToRenderKeyword}
+							handleHideTicketClick={handleHideTicketClick}
+							handleShowTicketClick={handleShowTicketClick}
+						/>
 						<h2>{ticket.title}</h2>
 						<p>{ticket.content}</p>
 						<section className="info-section">

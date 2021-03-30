@@ -12,7 +12,6 @@ import AddTicketForm from "./components/AddTicketForm";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
-import orange from "@material-ui/core/colors/amber";
 
 const theme = createMuiTheme({
 	palette: {
