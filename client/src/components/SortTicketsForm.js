@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
 function SortTicketsForm({
 	tickets,
 	setTickets,
+	sortBy,
+	setSortBy,
 	sortingOrder,
 	setSortingOrder,
 	sortFormOpen,
@@ -37,23 +39,47 @@ function SortTicketsForm({
 		setSortFormOpen(false);
 	};
 
+	const handleSortBySelectChange = (event) => {
+		setSortBy(event.target.value);
+	};
+
+	const handleSortingOrderSelectChange = (event) => {
+		setSortingOrder(event.target.value);
+	};
+
 	const handleSortClick = () => {
-		if (sortingOrder.ascending) {
+		console.log("sorting by:", sortBy);
+		console.log("order:", sortingOrder);
+
+		if (sortBy === "date") {
+			if (sortingOrder === "ascending") {
+				setTickets([
+					...tickets.sort((a, b) => {
+						return a.creationTime - b.creationTime;
+					}),
+				]);
+			} else if (sortingOrder === "descending") {
+				setTickets([
+					...tickets.sort((a, b) => {
+						return b.creationTime - a.creationTime;
+					}),
+				]);
+			}
+			return;
+		}
+
+		if (sortingOrder === "ascending") {
 			setTickets([
 				...tickets.sort((a, b) => {
-					return b.creationTime - a.creationTime;
+					return a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase());
 				}),
 			]);
-
-			setSortingOrder({ sortBy: sortingOrder.sortBy, ascending: false });
-		} else {
+		} else if (sortingOrder === "descending") {
 			setTickets([
 				...tickets.sort((a, b) => {
-					return a.creationTime - b.creationTime;
+					return b[sortBy].toLowerCase().localeCompare(a[sortBy].toLowerCase());
 				}),
 			]);
-
-			setSortingOrder({ sortBy: sortingOrder.sortBy, ascending: true });
 		}
 	};
 
@@ -75,16 +101,30 @@ function SortTicketsForm({
 						<InputLabel shrink id="sort-by-select-label">
 							Sort By...
 						</InputLabel>
-						<Select labelId="sort-by-select-label" id="sort-by-select" value={1} displayEmpty>
-							<MenuItem value="date">Date</MenuItem>
-							<MenuItem value={"alphabetical"}>Alphabetical</MenuItem>
+						<Select
+							labelId="sort-by-select-label"
+							id="sort-by-select"
+							value={sortBy}
+							onChange={handleSortBySelectChange}
+							displayEmpty
+						>
+							<MenuItem value={"date"}>Date</MenuItem>
+							<MenuItem value={"title"}>Title</MenuItem>
+							<MenuItem value={"userName"}>UserName</MenuItem>
+							<MenuItem value={"content"}>Content</MenuItem>
 						</Select>
 					</FormControl>
 					<FormControl className={classes.formControl}>
 						<InputLabel shrink id="order-select-label">
 							Order...
 						</InputLabel>
-						<Select labelId="order-select-label" id="order-select" value={1} displayEmpty>
+						<Select
+							labelId="order-select-label"
+							id="order-select"
+							value={sortingOrder}
+							onChange={handleSortingOrderSelectChange}
+							displayEmpty
+						>
 							<MenuItem value={"ascending"}>Ascending</MenuItem>
 							<MenuItem value={"descending"}>Descending</MenuItem>
 						</Select>

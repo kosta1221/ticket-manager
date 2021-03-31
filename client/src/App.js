@@ -41,7 +41,8 @@ function App() {
 	// "all" for rendering all tickets, "done" for done, "undone" for undone, "hidden" for hidden.
 	const [ticketsToRenderKeyword, setTicketsToRenderKeyword] = useState("all");
 	const [ticketsLoading, setTicketsLoading] = useState(true);
-	const [sortingOrder, setSortingOrder] = useState({ sortBy: "date", ascending: true });
+	const [sortBy, setSortBy] = useState("date");
+	const [sortingOrder, setSortingOrder] = useState("ascending");
 
 	const hiddenTicketsInfo = useRef(null);
 
@@ -49,11 +50,12 @@ function App() {
 		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
 
-			console.log("order:", sortingOrder.ascending);
+			console.log("sorting by:", sortBy);
+			console.log("order:", sortingOrder);
 			if (fetchedTickets) {
-				if (sortingOrder.ascending) {
+				if (sortingOrder === "ascending") {
 					setTickets([...fetchedTickets.sort((a, b) => a.creationTime - b.creationTime)]);
-				} else {
+				} else if (sortingOrder === "descending") {
 					setTickets([...fetchedTickets.sort((a, b) => b.creationTime - a.creationTime)]);
 				}
 			}
@@ -137,6 +139,8 @@ function App() {
 					setSortFormOpen={setSortFormOpen}
 					setTickets={setTickets}
 					tickets={tickets}
+					sortBy={sortBy}
+					setSortBy={setSortBy}
 					sortingOrder={sortingOrder}
 					setSortingOrder={setSortingOrder}
 				/>
