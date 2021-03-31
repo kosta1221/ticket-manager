@@ -32,6 +32,7 @@ function SortTicketsForm({
 	setSortingOrder,
 	sortFormOpen,
 	setSortFormOpen,
+	handleSort,
 }) {
 	const classes = useStyles();
 
@@ -48,39 +49,7 @@ function SortTicketsForm({
 	};
 
 	const handleSortClick = () => {
-		console.log("sorting by:", sortBy);
-		console.log("order:", sortingOrder);
-
-		if (sortBy === "date") {
-			if (sortingOrder === "ascending") {
-				setTickets([
-					...tickets.sort((a, b) => {
-						return a.creationTime - b.creationTime;
-					}),
-				]);
-			} else if (sortingOrder === "descending") {
-				setTickets([
-					...tickets.sort((a, b) => {
-						return b.creationTime - a.creationTime;
-					}),
-				]);
-			}
-			return;
-		}
-
-		if (sortingOrder === "ascending") {
-			setTickets([
-				...tickets.sort((a, b) => {
-					return a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase());
-				}),
-			]);
-		} else if (sortingOrder === "descending") {
-			setTickets([
-				...tickets.sort((a, b) => {
-					return b[sortBy].toLowerCase().localeCompare(a[sortBy].toLowerCase());
-				}),
-			]);
-		}
+		handleSort(tickets);
 	};
 
 	return (

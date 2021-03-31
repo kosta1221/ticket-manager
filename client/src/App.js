@@ -50,15 +50,7 @@ function App() {
 		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
 
-			console.log("sorting by:", sortBy);
-			console.log("order:", sortingOrder);
-			if (fetchedTickets) {
-				if (sortingOrder === "ascending") {
-					setTickets([...fetchedTickets.sort((a, b) => a.creationTime - b.creationTime)]);
-				} else if (sortingOrder === "descending") {
-					setTickets([...fetchedTickets.sort((a, b) => b.creationTime - a.creationTime)]);
-				}
-			}
+			handleSort(fetchedTickets);
 		});
 	}, [input, searchBy]);
 
@@ -95,6 +87,46 @@ function App() {
 		setHideTicketsCounter(0);
 
 		setHiddenTickets([]);
+	};
+
+	const handleSort = (ticketsToSort) => {
+		console.log("sorting by:", sortBy);
+		console.log("order:", sortingOrder);
+
+		if (sortBy === "date") {
+			if (sortingOrder === "ascending") {
+				// Sort by creation date ascending
+				setTickets([
+					...ticketsToSort.sort((a, b) => {
+						return a.creationTime - b.creationTime;
+					}),
+				]);
+			} else if (sortingOrder === "descending") {
+				// Sort by creation date descending
+				setTickets([
+					...ticketsToSort.sort((a, b) => {
+						return b.creationTime - a.creationTime;
+					}),
+				]);
+			}
+			return;
+		}
+
+		if (sortingOrder === "ascending") {
+			// Sort by ascending order alphabetically according to prop passed (either title, content or userEmail)
+			setTickets([
+				...tickets.sort((a, b) => {
+					return a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase());
+				}),
+			]);
+		} else if (sortingOrder === "descending") {
+			// Sort by descending order alphabetically according to prop passed (either title, content or userEmail)
+			setTickets([
+				...tickets.sort((a, b) => {
+					return b[sortBy].toLowerCase().localeCompare(a[sortBy].toLowerCase());
+				}),
+			]);
+		}
 	};
 
 	return (
@@ -143,6 +175,7 @@ function App() {
 					setSortBy={setSortBy}
 					sortingOrder={sortingOrder}
 					setSortingOrder={setSortingOrder}
+					handleSort={handleSort}
 				/>
 
 				<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
