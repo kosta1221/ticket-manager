@@ -50,7 +50,9 @@ function App() {
 		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
 
-			handleSort(fetchedTickets);
+			if (fetchedTickets) {
+				handleSort(fetchedTickets);
+			}
 		});
 	}, [input, searchBy]);
 

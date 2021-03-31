@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 function SortTicketsForm({
 	tickets,
-	setTickets,
 	sortBy,
 	setSortBy,
 	sortingOrder,
@@ -36,12 +35,22 @@ function SortTicketsForm({
 }) {
 	const classes = useStyles();
 
+	// This is a textual cue for explaining that descending/ascending by title/userName/content means alphabetical descending/ascending, and it is added to the select's label
+	const [sortingOrderAddedWord, setSortingOrderAddedWord] = useState("");
+
 	const handleClose = () => {
 		setSortFormOpen(false);
 	};
 
 	const handleSortBySelectChange = (event) => {
 		setSortBy(event.target.value);
+
+		// This is a textual cue for explaining that descending/ascending by title/userName/content means alphabetical descending/ascending, and it is added to the select's label
+		if (event.target.value === "date") {
+			setSortingOrderAddedWord("");
+		} else {
+			setSortingOrderAddedWord(" (Alphabetical)");
+		}
 	};
 
 	const handleSortingOrderSelectChange = (event) => {
@@ -85,7 +94,7 @@ function SortTicketsForm({
 					</FormControl>
 					<FormControl className={classes.formControl}>
 						<InputLabel shrink id="order-select-label">
-							Order...
+							{`Order...${sortingOrderAddedWord}`}
 						</InputLabel>
 						<Select
 							labelId="order-select-label"
