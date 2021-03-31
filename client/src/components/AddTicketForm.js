@@ -32,11 +32,6 @@ function AddTicketForm({ addFormOpen, setAddFormOpen }) {
 						id="add-ticket-form"
 						action={`${URL}/tickets/new`}
 						method="POST"
-						// onSubmit={(e) => {
-						// 	e.preventDefault();
-						// 	alert("Submitted form!");
-						// 	handleClose();
-						// }}
 					>
 						<DialogContentText>
 							To add a new ticket please fill out the required (*) fields. We will do our best to

@@ -4,9 +4,11 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useEffect, useState, useRef } from "react";
 import { fetchTickets } from "./utils";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import SortIcon from "@material-ui/icons/Sort";
 import { Fab } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 import SearchAppBar from "./components/SearchAppBar";
+import SortTicketButton from "./components/SortTicketsButton";
 import ScrollTop from "./components/ScrollTop";
 import AddTicketForm from "./components/AddTicketForm";
 
@@ -39,6 +41,7 @@ function App() {
 	// "all" for rendering all tickets, "done" for done, "undone" for undone, "hidden" for hidden.
 	const [ticketsToRenderKeyword, setTicketsToRenderKeyword] = useState("all");
 	const [ticketsLoading, setTicketsLoading] = useState(true);
+	const [sortingOrder, setSortingOrder] = useState({ sortBy: "date", ascending: true });
 
 	const hiddenTicketsInfo = useRef(null);
 
@@ -119,6 +122,17 @@ function App() {
 					ticketsLoading={ticketsLoading}
 					setTicketsLoading={setTicketsLoading}
 				/>
+
+				<SortTicketButton
+					setTicketsToRender={setTicketsToRender}
+					ticketsToRender={ticketsToRender}
+					sortingOrder={sortingOrder}
+					setSortingOrder={setSortingOrder}
+				>
+					<Fab size="small" color="primary" aria-label="sort tickets">
+						<SortIcon />
+					</Fab>
+				</SortTicketButton>
 
 				<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
 
