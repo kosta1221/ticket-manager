@@ -46,8 +46,17 @@ function App() {
 	const hiddenTicketsInfo = useRef(null);
 
 	useEffect(() => {
-		fetchTickets(setTickets, input, searchBy).then(() => {
+		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
+
+			console.log("order:", sortingOrder.ascending);
+			if (fetchedTickets) {
+				if (sortingOrder.ascending) {
+					setTickets([...fetchedTickets.sort((a, b) => a.creationTime - b.creationTime)]);
+				} else {
+					setTickets([...fetchedTickets.sort((a, b) => b.creationTime - a.creationTime)]);
+				}
+			}
 		});
 	}, [input, searchBy]);
 
@@ -124,8 +133,8 @@ function App() {
 				/>
 
 				<SortTicketButton
-					setTicketsToRender={setTicketsToRender}
-					ticketsToRender={ticketsToRender}
+					setTickets={setTickets}
+					tickets={tickets}
 					sortingOrder={sortingOrder}
 					setSortingOrder={setSortingOrder}
 				>

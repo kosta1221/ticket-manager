@@ -11,8 +11,8 @@ const useStyles = makeStyles((theme) => ({
 
 function SortTicketButton({
 	children,
-	ticketsToRender,
-	setTicketsToRender,
+	tickets,
+	setTickets,
 	sortingOrder,
 	setSortingOrder,
 }) {
@@ -20,16 +20,16 @@ function SortTicketButton({
 
 	const handleSortClick = () => {
 		if (sortingOrder.ascending) {
-			setTicketsToRender([
-				...ticketsToRender.sort((a, b) => {
+			setTickets([
+				...tickets.sort((a, b) => {
 					return b.creationTime - a.creationTime;
 				}),
 			]);
 
 			setSortingOrder({ sortBy: sortingOrder.sortBy, ascending: false });
 		} else {
-			setTicketsToRender([
-				...ticketsToRender.sort((a, b) => {
+			setTickets([
+				...tickets.sort((a, b) => {
 					return a.creationTime - b.creationTime;
 				}),
 			]);
