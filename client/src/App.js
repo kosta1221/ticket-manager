@@ -4,13 +4,12 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { useEffect, useState, useRef } from "react";
 import { fetchTickets } from "./utils";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
-import SortIcon from "@material-ui/icons/Sort";
 import { Fab } from "@material-ui/core";
 import Tickets from "./components/Tickets";
 import SearchAppBar from "./components/SearchAppBar";
-import SortTicketButton from "./components/SortTicketsButton";
 import ScrollTop from "./components/ScrollTop";
 import AddTicketForm from "./components/AddTicketForm";
+import SortTicketsForm from "./components/SortTicketsForm";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -28,6 +27,7 @@ const theme = createMuiTheme({
 
 function App() {
 	const [addFormOpen, setAddFormOpen] = useState(false);
+	const [sortFormOpen, setSortFormOpen] = useState(false);
 
 	const [resultsCount, setResultsCount] = useState(0);
 	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
@@ -132,16 +132,14 @@ function App() {
 					setTicketsLoading={setTicketsLoading}
 				/>
 
-				<SortTicketButton
+				<SortTicketsForm
+					sortFormOpen={sortFormOpen}
+					setSortFormOpen={setSortFormOpen}
 					setTickets={setTickets}
 					tickets={tickets}
 					sortingOrder={sortingOrder}
 					setSortingOrder={setSortingOrder}
-				>
-					<Fab size="small" color="primary" aria-label="sort tickets">
-						<SortIcon />
-					</Fab>
-				</SortTicketButton>
+				/>
 
 				<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
 

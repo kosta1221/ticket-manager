@@ -142,12 +142,12 @@ export default function SearchAppBar({
 						/>
 					</div>
 					<FormControl className={classes.formControl}>
-						<InputLabel shrink id="demo-simple-select-placeholder-label-label">
+						<InputLabel shrink id="search-by-select-label">
 							Search By...
 						</InputLabel>
 						<Select
-							labelId="demo-simple-select-placeholder-label-label"
-							id="demo-simple-select-placeholder-label"
+							labelId="search-by-select-label"
+							id="search-by-select"
 							value={searchBy}
 							onChange={handleSelectChange}
 							displayEmpty

@@ -9,38 +9,16 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-function SortTicketButton({
-	children,
-	tickets,
-	setTickets,
-	sortingOrder,
-	setSortingOrder,
-}) {
+function SortTicketButton({ children, setSortFormOpen }) {
 	const classes = useStyles();
 
-	const handleSortClick = () => {
-		if (sortingOrder.ascending) {
-			setTickets([
-				...tickets.sort((a, b) => {
-					return b.creationTime - a.creationTime;
-				}),
-			]);
-
-			setSortingOrder({ sortBy: sortingOrder.sortBy, ascending: false });
-		} else {
-			setTickets([
-				...tickets.sort((a, b) => {
-					return a.creationTime - b.creationTime;
-				}),
-			]);
-
-			setSortingOrder({ sortBy: sortingOrder.sortBy, ascending: true });
-		}
+	const handleSortFormOpen = () => {
+		setSortFormOpen(true);
 	};
 
 	return (
 		<Zoom in={true}>
-			<div onClick={handleSortClick} role="button" className={classes.root}>
+			<div onClick={handleSortFormOpen} role="button" className={classes.root}>
 				{children}
 			</div>
 		</Zoom>
