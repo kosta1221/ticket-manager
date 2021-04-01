@@ -46,7 +46,9 @@ function App() {
 
 	const hiddenTicketsInfo = useRef(null);
 
+	// This useEffect runs on changes to input, searchBy. it fetches the tickets from database, and sorts them according to sortingOrder and sortBy.
 	useEffect(() => {
+		setTicketsLoading(true);
 		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
 
@@ -55,6 +57,20 @@ function App() {
 			}
 		});
 	}, [input, searchBy]);
+
+	// This useEffect runs on addFormOpen, and I added a condition so that it runs only when I close the form. What it does is fetch the tickets from database.
+	useEffect(() => {
+		if (!addFormOpen) {
+			setTicketsLoading(true);
+			fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
+				setTicketsLoading(false);
+
+				if (fetchedTickets) {
+					handleSort(fetchedTickets);
+				}
+			});
+		}
+	}, [addFormOpen]);
 
 	useEffect(() => {
 		setResultsCount(ticketsToRender.length);
