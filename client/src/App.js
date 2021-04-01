@@ -27,6 +27,7 @@ const theme = createMuiTheme({
 
 function App() {
 	const [addFormOpen, setAddFormOpen] = useState(false);
+	const [addFormPosted, setAddFormPosted] = useState(false);
 	const [sortFormOpen, setSortFormOpen] = useState(false);
 
 	const [resultsCount, setResultsCount] = useState(0);
@@ -58,19 +59,21 @@ function App() {
 		});
 	}, [input, searchBy]);
 
-	// This useEffect runs on addFormOpen, and I added a condition so that it runs only when I close the form. What it does is fetch the tickets from database.
+	// This useEffect runs on addFormPosted, and I added a condition so that it runs only when I close the form and the form is posted successfully. What it does is fetch the tickets from database.
 	useEffect(() => {
-		if (!addFormOpen) {
+		if (!addFormOpen && addFormPosted) {
 			setTicketsLoading(true);
+
 			fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
 				setTicketsLoading(false);
+				setAddFormPosted(false);
 
 				if (fetchedTickets) {
 					handleSort(fetchedTickets);
 				}
 			});
 		}
-	}, [addFormOpen]);
+	}, [addFormPosted]);
 
 	useEffect(() => {
 		setResultsCount(ticketsToRender.length);
@@ -196,7 +199,11 @@ function App() {
 					handleSort={handleSort}
 				/>
 
-				<AddTicketForm addFormOpen={addFormOpen} setAddFormOpen={setAddFormOpen} />
+				<AddTicketForm
+					addFormOpen={addFormOpen}
+					setAddFormOpen={setAddFormOpen}
+					setAddFormPosted={setAddFormPosted}
+				/>
 
 				<ScrollTop>
 					<Fab color="primary" size="small" aria-label="scroll back to top">

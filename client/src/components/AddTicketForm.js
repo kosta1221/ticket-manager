@@ -11,9 +11,9 @@ import AddTicketButton from "./AddTicketButton";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import { URL, postTicket } from "../utils";
+import { postTicket } from "../utils";
 
-function AddTicketForm({ addFormOpen, setAddFormOpen }) {
+function AddTicketForm({ addFormOpen, setAddFormOpen, setAddFormPosted }) {
 	const handleClose = () => {
 		setAddFormOpen(false);
 	};
@@ -32,6 +32,7 @@ function AddTicketForm({ addFormOpen, setAddFormOpen }) {
 			.then((newTicket) => {
 				console.log("new created ticket:", newTicket);
 				handleClose();
+				setAddFormPosted(true);
 			})
 			.catch((error) => console.log(error));
 	};
