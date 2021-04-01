@@ -16,8 +16,8 @@ function Tickets({
 	ticketsLoading,
 	setTicketsLoading,
 }) {
-	console.log(ticketsToRenderKeyword);
-	console.log("hidden tickets: ", hiddenTickets);
+	// console.log(ticketsToRenderKeyword);
+	// console.log("hidden tickets: ", hiddenTickets);
 
 	if (ticketsLoading) {
 		return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;

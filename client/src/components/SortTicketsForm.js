@@ -59,6 +59,7 @@ function SortTicketsForm({
 
 	const handleSortClick = () => {
 		handleSort(tickets);
+		handleClose();
 	};
 
 	return (
