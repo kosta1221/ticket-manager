@@ -157,11 +157,12 @@ function App() {
 					setInput={setInput}
 					searchBy={searchBy}
 					setSearchBy={setSearchBy}
+					ticketsToRenderKeyword={ticketsToRenderKeyword}
 					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
 				/>
 				<section className="results-info-section" id="back-to-top-anchor">
 					<p>
-						<span>{`Showing ${resultsCount} results `}</span>
+						<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword} `}</span>
 						<span ref={hiddenTicketsInfo}>
 							{`(`}
 							<span id="hideTicketsCounter">{hideTicketsCounter}</span>

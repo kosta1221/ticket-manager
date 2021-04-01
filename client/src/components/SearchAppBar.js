@@ -14,6 +14,8 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
 import Drawer from "./Drawer";
+import Chip from "@material-ui/core/Chip";
+import VisibilityOnIcon from "@material-ui/icons/Visibility";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -28,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	title: {
 		flexGrow: 1,
+		marginRight: theme.spacing(1),
 		display: "none",
 		[theme.breakpoints.up("sm")]: {
 			display: "block",
@@ -81,6 +84,7 @@ export default function SearchAppBar({
 	setInput,
 	searchBy,
 	setSearchBy,
+	ticketsToRenderKeyword,
 	setTicketsToRenderKeyword,
 }) {
 	const classes = useStyles();
@@ -105,7 +109,7 @@ export default function SearchAppBar({
 	};
 
 	return (
-		<div className={classes.root}>
+		<div className={`${classes.root} search-app-bar`}>
 			<AppBar position="sticky" top={0}>
 				<Drawer
 					drawerShowed={drawerShowed}
@@ -122,9 +126,18 @@ export default function SearchAppBar({
 					>
 						<MenuIcon />
 					</IconButton>
+
 					<Typography className={classes.title} variant="h6" noWrap>
 						Kosta's Ticket Manager
 					</Typography>
+
+					<Chip
+						className="viewChip"
+						color="default"
+						icon={<VisibilityOnIcon />}
+						label={ticketsToRenderKeyword}
+					/>
+
 					<div className={classes.search}>
 						<div className={classes.searchIcon}>
 							<SearchIcon />
