@@ -40,6 +40,23 @@ export const deleteTicket = async (ticketId, tickets, setTickets) => {
 	}
 };
 
+export const postTicket = async (ticket) => {
+	console.log(`trying to post new ticket: `, ticket);
+	console.log(`to: ${URL}/tickets/new`);
+	try {
+		const response = await axios({
+			method: "POST",
+			url: `${URL}/tickets/new`,
+			headers: { "Content-Type": "application/json" },
+			data: ticket,
+		});
+		return response.data;
+	} catch (e) {
+		console.log(e);
+		throw e;
+	}
+};
+
 export const toggleTicketDone = async (ticketId, done, setDone, tickets, setTickets) => {
 	let doneWord = "done";
 
