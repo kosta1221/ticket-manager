@@ -11,11 +11,29 @@ import AddTicketButton from "./AddTicketButton";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
-import { URL } from "../utils";
+import { URL, postTicket } from "../utils";
 
 function AddTicketForm({ addFormOpen, setAddFormOpen }) {
 	const handleClose = () => {
 		setAddFormOpen(false);
+	};
+
+	const onFormSubmit = (event) => {
+		event.preventDefault();
+		const formData = new FormData(event.target);
+
+		const body = {};
+		formData.forEach((value, property) => (body[property] = value));
+
+		console.log("form data:");
+		console.table(body);
+
+		postTicket(body)
+			.then((newTicket) => {
+				console.log("new created ticket:", newTicket);
+				handleClose();
+			})
+			.catch((error) => console.log(error));
 	};
 
 	return (
@@ -28,11 +46,7 @@ function AddTicketForm({ addFormOpen, setAddFormOpen }) {
 			<Dialog open={addFormOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Add a New Ticket...</DialogTitle>
 				<DialogContent>
-					<form
-						id="add-ticket-form"
-						action={`${URL}/tickets/new`}
-						method="POST"
-					>
+					<form id="add-ticket-form" onSubmit={onFormSubmit}>
 						<DialogContentText>
 							To add a new ticket please fill out the required (*) fields. We will do our best to
 							review each and every ticket! Thank you for helping us make our platform better.
