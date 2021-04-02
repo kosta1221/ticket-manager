@@ -27,17 +27,20 @@
 		}
 	}
 
+	// For display of search by
 	.MuiFormControl-root {
 		min-width: 15%;
 		margin-top: 0;
 		margin-left: 3vw;
 		margin-right: 0;
 
+		// Search By...
 		label {
 			color: lightgrey;
 			font-size: 0.85rem;
 		}
 
+		// Select
 		div {
 			color: white;
 		}
