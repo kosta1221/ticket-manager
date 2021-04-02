@@ -40,19 +40,21 @@
 }
 
 .ticket .info-section div {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  display: block;
+  float: right;
   max-width: 45vw;
   overflow-x: auto;
 }
 
 .ticket .info-section .label {
-  margin-right: 1vw;
+  margin: 0.3vw;
   font-size: 0.85rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.ticket .info-section .label span {
   text-transform: none;
 }
 

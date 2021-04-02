@@ -4,6 +4,7 @@ import { deleteTicket, toggleTicketDone } from "../utils";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
+import Chip from "@material-ui/core/Chip";
 
 import HideOrShowTicketButton from "./HideOrShowTicketButton";
 
@@ -83,15 +84,7 @@ function Ticket({
 
 							<div>
 								{labelArray.map((label, i) => (
-									<Button
-										key={`label-${i}`}
-										className="label"
-										variant="contained"
-										size="small"
-										color="primary"
-									>
-										{label}
-									</Button>
+									<Chip key={`label-${i}`} className="label" label={label} color="primary"></Chip>
 								))}
 							</div>
 						</section>
