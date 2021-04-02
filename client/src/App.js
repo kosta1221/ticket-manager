@@ -10,6 +10,7 @@ import SearchAppBar from "./components/SearchAppBar";
 import ScrollTop from "./components/ScrollTop";
 import AddTicketForm from "./components/AddTicketForm";
 import SortTicketsForm from "./components/SortTicketsForm";
+import LabelInclusionForm from "./components/LabelsInclusionForm";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -29,6 +30,7 @@ function App() {
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [addFormPosted, setAddFormPosted] = useState(false);
 	const [sortFormOpen, setSortFormOpen] = useState(false);
+	const [labelFormOpen, setLabelFormOpen] = useState(false);
 
 	const [resultsCount, setResultsCount] = useState(0);
 	const [hideTicketsCounter, setHideTicketsCounter] = useState(0);
@@ -192,6 +194,8 @@ function App() {
 					ticketsLoading={ticketsLoading}
 					setTicketsLoading={setTicketsLoading}
 				/>
+
+				<LabelInclusionForm labelFormOpen={labelFormOpen} setLabelFormOpen={setLabelFormOpen} />
 
 				<SortTicketsForm
 					sortFormOpen={sortFormOpen}
