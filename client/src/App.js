@@ -29,6 +29,7 @@ const theme = createMuiTheme({
 function App() {
 	const [allLabels, setAllLabels] = useState([]);
 	const [currentLabels, setCurrentLabels] = useState([]);
+	const [isLabelInclusion, setIsLabelInclusion] = useState(true);
 
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [addFormPosted, setAddFormPosted] = useState(false);
@@ -249,6 +250,8 @@ function App() {
 					allLabels={allLabels}
 					currentLabels={currentLabels}
 					setCurrentLabels={setCurrentLabels}
+					isLabelInclusion={isLabelInclusion}
+					setIsLabelInclusion={setIsLabelInclusion}
 				/>
 
 				<SortTicketsForm

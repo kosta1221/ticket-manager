@@ -25,20 +25,28 @@ const useStyles = makeStyles((theme) => ({
 	label: {
 		margin: theme.spacing(0.3),
 	},
+	noTransform: {
+		textTransform: "none",
+	},
 }));
 
 function SortTicketsForm({
-	tickets,
 	labelFormOpen,
 	setLabelFormOpen,
 	allLabels,
 	currentLabels,
 	setCurrentLabels,
+	isLabelInclusion,
+	setIsLabelInclusion,
 }) {
 	const classes = useStyles();
 
 	const handleClose = () => {
 		setLabelFormOpen(false);
+	};
+
+	const handleInclusionOrExclusionChange = (event, newMode) => {
+		setIsLabelInclusion(newMode);
 	};
 
 	const handleLabelsChange = (event, newLabels) => {
@@ -60,13 +68,27 @@ function SortTicketsForm({
 						chosen, all tickets will be shown.
 					</DialogContentText>
 					<ToggleButtonGroup
+						value={isLabelInclusion}
+						exclusive
+						onChange={handleInclusionOrExclusionChange}
+						aria-label="inclusion or exclusion mode"
+					>
+						<ToggleButton className={classes.noTransform} value={true} aria-label="include labels">
+							Labels to Include
+						</ToggleButton>
+						<ToggleButton className={classes.noTransform} value={false} aria-label="exclude labels">
+							Labels to Exclude
+						</ToggleButton>
+					</ToggleButtonGroup>
+
+					<ToggleButtonGroup
 						value={currentLabels}
 						onChange={handleLabelsChange}
 						aria-label="text formatting"
 					>
 						{allLabels.map((label, i) => (
 							<ToggleButton
-								className={classes.label}
+								className={`${classes.label} ${classes.noTransform}`}
 								key={`toggle-button-label-${i}`}
 								value={label}
 								aria-label={label}
