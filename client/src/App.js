@@ -106,19 +106,27 @@ function App() {
 
 	useEffect(() => {
 		if (ticketsToRenderKeyword === "all") {
-			setTicketsToRender(tickets.filter((ticket) => !hiddenTickets.includes(ticket)));
+			setTicketsToRender(
+				tickets.filter((ticket) => !hiddenTickets.includes(ticket) && ticketLabelCheck(ticket))
+			);
 		} else if (ticketsToRenderKeyword === "done") {
 			setTicketsToRender(
-				tickets.filter((ticket) => ticket.done === true && !hiddenTickets.includes(ticket))
+				tickets.filter(
+					(ticket) =>
+						ticket.done === true && !hiddenTickets.includes(ticket) && ticketLabelCheck(ticket)
+				)
 			);
 		} else if (ticketsToRenderKeyword === "undone") {
 			setTicketsToRender(
-				tickets.filter((ticket) => ticket.done === false && !hiddenTickets.includes(ticket))
+				tickets.filter(
+					(ticket) =>
+						ticket.done === false && !hiddenTickets.includes(ticket) && ticketLabelCheck(ticket)
+				)
 			);
 		} else if (ticketsToRenderKeyword === "hidden") {
-			setTicketsToRender([...hiddenTickets]);
+			setTicketsToRender(hiddenTickets.filter((hiddenTicket) => ticketLabelCheck(hiddenTicket)));
 		}
-	}, [ticketsToRenderKeyword, tickets, hiddenTickets]);
+	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabels]);
 
 	useEffect(() => {
 		if (hideTicketsCounter === 0) {
@@ -173,6 +181,23 @@ function App() {
 				}),
 			]);
 		}
+	};
+
+	// A function for checking wheter to render a ticket or not based on included labels.
+	const ticketLabelCheck = (ticket) => {
+		// If no labels are selected for inclusion, I want to show all of the tickets.
+		if (currentLabels.length === 0) {
+			return true;
+		}
+
+		// If ticket's labels includes any of the current labels, it'll pass the check.
+		for (const label of currentLabels) {
+			if (ticket.labels.includes(label)) {
+				return true;
+			}
+		}
+
+		return false;
 	};
 
 	return (
