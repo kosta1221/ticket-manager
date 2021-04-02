@@ -84,7 +84,13 @@ function Ticket({
 
 							<div>
 								{labelArray.map((label, i) => (
-									<Chip key={`label-${i}`} className="label" label={label} color="primary"></Chip>
+									<Chip
+										key={`label-${i}`}
+										className="label"
+										label={label}
+										onClick={() => {}}
+										color="primary"
+									></Chip>
 								))}
 							</div>
 						</section>
@@ -121,15 +127,13 @@ function Ticket({
 
 							<div>
 								{labelArray.map((label, i) => (
-									<Button
+									<Chip
 										key={`label-${i}`}
 										className="label"
-										variant="outlined"
-										size="small"
+										label={label}
+										onClick={() => {}}
 										color="primary"
-									>
-										{label}
-									</Button>
+									></Chip>
 								))}
 							</div>
 						</section>
