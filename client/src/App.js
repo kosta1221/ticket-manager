@@ -52,6 +52,9 @@ function App() {
 	const [sortingOrder, setSortingOrder] = useState("ascending");
 
 	const hiddenTicketsInfo = useRef(null);
+	const labelModeKeyword = isLabelInclusion ? "including" : "excluding";
+	const labelModeLengthKeyword =
+		isLabelInclusion && currentLabels.length === 0 ? "all" : currentLabels.length;
 
 	// This useEffect runs on changes to input, searchBy. it fetches the tickets from database, and sorts them according to sortingOrder and sortBy.
 	useEffect(() => {
@@ -227,7 +230,7 @@ function App() {
 				<section className="results-info-section" id="back-to-top-anchor">
 					<p>
 						<span>
-							<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword} `}</span>
+							<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword}, ${labelModeKeyword} ${labelModeLengthKeyword} labels `}</span>
 							<span ref={hiddenTicketsInfo}>
 								{`(`}
 								<span id="hideTicketsCounter">{hideTicketsCounter}</span>
