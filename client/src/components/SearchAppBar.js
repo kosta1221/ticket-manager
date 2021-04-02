@@ -16,6 +16,10 @@ import Select from "@material-ui/core/Select";
 import Drawer from "./Drawer";
 import Chip from "@material-ui/core/Chip";
 import VisibilityOnIcon from "@material-ui/icons/Visibility";
+import SortIcon from "@material-ui/icons/Sort";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -86,6 +90,8 @@ export default function SearchAppBar({
 	setSearchBy,
 	ticketsToRenderKeyword,
 	setTicketsToRenderKeyword,
+	sortBy,
+	sortingOrder,
 }) {
 	const classes = useStyles();
 
@@ -136,6 +142,20 @@ export default function SearchAppBar({
 						color="default"
 						icon={<VisibilityOnIcon />}
 						label={ticketsToRenderKeyword}
+					/>
+
+					<Chip
+						className="sortChip viewChip"
+						color="default"
+						icon={sortBy === "date" ? <SortIcon /> : <SortByAlphaIcon />}
+						label={sortBy}
+					/>
+
+					<Chip
+						className="sortChip viewChip"
+						color="default"
+						icon={sortingOrder === "ascending" ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+						label={sortingOrder}
 					/>
 
 					<div className={classes.search}>

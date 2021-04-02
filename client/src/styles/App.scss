@@ -8,6 +8,25 @@
 	padding-bottom: 0.2vh;
 	background: linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%);
 
+	.results-info-section {
+		p {
+			#sorted-by-info {
+				display: none;
+			}
+		}
+
+		@media only screen and (max-width: 900px) {
+			p {
+				display: flex;
+				flex-direction: column;
+
+				#sorted-by-info {
+					display: inline;
+				}
+			}
+		}
+	}
+
 	.MuiFormControl-root {
 		min-width: 15%;
 		margin-top: 0;

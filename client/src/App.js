@@ -159,19 +159,24 @@ function App() {
 					setSearchBy={setSearchBy}
 					ticketsToRenderKeyword={ticketsToRenderKeyword}
 					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+					sortBy={sortBy}
+					sortingOrder={sortingOrder}
 				/>
 				<section className="results-info-section" id="back-to-top-anchor">
 					<p>
-						<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword} `}</span>
-						<span ref={hiddenTicketsInfo}>
-							{`(`}
-							<span id="hideTicketsCounter">{hideTicketsCounter}</span>
-							{` hidden tickets - `}
-							<a id="restoreHideTickets" href="#" onClick={handleRestoreHiddenClick}>
-								restore
-							</a>
-							)
+						<span>
+							<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword} `}</span>
+							<span ref={hiddenTicketsInfo}>
+								{`(`}
+								<span id="hideTicketsCounter">{hideTicketsCounter}</span>
+								{` hidden tickets - `}
+								<a id="restoreHideTickets" href="#" onClick={handleRestoreHiddenClick}>
+									restore
+								</a>
+								)
+							</span>
 						</span>
+						<span id="sorted-by-info">{`Sorted by: ${sortBy}, ${sortingOrder}`}</span>
 					</p>
 				</section>
 				<Tickets
