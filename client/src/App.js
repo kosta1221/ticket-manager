@@ -27,6 +27,9 @@ const theme = createMuiTheme({
 });
 
 function App() {
+	const [allLabels, setAllLabels] = useState([]);
+	const [currentLabels, setCurrentLabels] = useState([]);
+
 	const [addFormOpen, setAddFormOpen] = useState(false);
 	const [addFormPosted, setAddFormPosted] = useState(false);
 	const [sortFormOpen, setSortFormOpen] = useState(false);
@@ -57,6 +60,16 @@ function App() {
 
 			if (fetchedTickets) {
 				handleSort(fetchedTickets);
+				setAllLabels(
+					Array.prototype.concat
+						.apply(
+							[],
+							fetchedTickets.map((ticket) => ticket.labels)
+						)
+						.filter(
+							(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
+						)
+				);
 			}
 		});
 	}, [input, searchBy]);
@@ -72,6 +85,16 @@ function App() {
 
 				if (fetchedTickets) {
 					handleSort(fetchedTickets);
+					setAllLabels(
+						Array.prototype.concat
+							.apply(
+								[],
+								fetchedTickets.map((ticket) => ticket.labels)
+							)
+							.filter(
+								(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
+							)
+					);
 				}
 			});
 		}
@@ -195,7 +218,13 @@ function App() {
 					setTicketsLoading={setTicketsLoading}
 				/>
 
-				<LabelInclusionForm labelFormOpen={labelFormOpen} setLabelFormOpen={setLabelFormOpen} />
+				<LabelInclusionForm
+					labelFormOpen={labelFormOpen}
+					setLabelFormOpen={setLabelFormOpen}
+					allLabels={allLabels}
+					currentLabels={currentLabels}
+					setCurrentLabels={setCurrentLabels}
+				/>
 
 				<SortTicketsForm
 					sortFormOpen={sortFormOpen}
