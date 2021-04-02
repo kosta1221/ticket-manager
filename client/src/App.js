@@ -127,7 +127,7 @@ function App() {
 		} else if (ticketsToRenderKeyword === "hidden") {
 			setTicketsToRender(hiddenTickets.filter((hiddenTicket) => ticketLabelCheck(hiddenTicket)));
 		}
-	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabels]);
+	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabels, isLabelInclusion]);
 
 	useEffect(() => {
 		if (hideTicketsCounter === 0) {
@@ -191,14 +191,25 @@ function App() {
 			return true;
 		}
 
-		// If ticket's labels includes any of the current labels, it'll pass the check.
-		for (const label of currentLabels) {
-			if (ticket.labels.includes(label)) {
-				return true;
+		if (isLabelInclusion) {
+			// If mode is inclusion based on labels, if ticket's labels includes any of the current labels, it'll pass the check.
+			for (const label of currentLabels) {
+				if (ticket.labels.includes(label)) {
+					return true;
+				}
 			}
-		}
 
-		return false;
+			return false;
+		} else {
+			// If mode is exclusion based on labels, if ticket's labels includes any of the current labels, it'll fail the check. only if it includes none of the excluded/blacklisted labels it'll pass.
+			for (const label of currentLabels) {
+				if (ticket.labels.includes(label)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
 	};
 
 	return (
