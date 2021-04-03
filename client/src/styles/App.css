@@ -160,4 +160,8 @@
 .App .MuiFormControl-root div {
   color: white;
 }
+
+.MuiPaper-root {
+  background-color: #fff;
+}
 /*# sourceMappingURL=App.css.map */
