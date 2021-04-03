@@ -13,6 +13,9 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import CheckCircle from "@material-ui/icons/CheckCircle";
 import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import PaletteIcon from "@material-ui/icons/Palette";
+
+import { createMuiTheme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
 	left: {
@@ -20,7 +23,29 @@ const useStyles = makeStyles({
 	},
 });
 
-function Drawer({ drawerShowed, setDrawerShowed, setTicketsToRenderKeyword }) {
+const alternativeTheme = createMuiTheme({
+	palette: {
+		primary: {
+			main: "#006064",
+		},
+		secondary: {
+			main: "#d32f2f",
+		},
+		doneGreen: {
+			main: "green",
+		},
+		ticketBackground: "powderblue",
+		background: "linear-gradient(90deg, rgba(24,126,255,1) 0%, rgba(99,212,244,1) 100%)",
+	},
+});
+
+function Drawer({
+	drawerShowed,
+	setDrawerShowed,
+	setTicketsToRenderKeyword,
+	initialTheme,
+	setTheme,
+}) {
 	const classes = useStyles();
 
 	const toggleDrawer = (open) => (event) => {
@@ -72,6 +97,28 @@ function Drawer({ drawerShowed, setDrawerShowed, setTicketsToRenderKeyword }) {
 						}}
 					>
 						<ListItemIcon>{<VisibilityOffIcon />}</ListItemIcon>
+						<ListItemText primary={text} />
+					</ListItem>
+				))}
+			</List>
+			<Divider />
+			<List>
+				<ListItem>
+					<ListItemText primary="- Pick a theme!" />
+				</ListItem>
+				{["Orangey Oranges", "Bluey Blues"].map((text, index) => (
+					<ListItem
+						button
+						key={text}
+						onClick={() => {
+							if (index === 0) {
+								setTheme(initialTheme);
+							} else {
+								setTheme(alternativeTheme);
+							}
+						}}
+					>
+						<ListItemIcon>{<PaletteIcon />}</ListItemIcon>
 						<ListItemText primary={text} />
 					</ListItem>
 				))}

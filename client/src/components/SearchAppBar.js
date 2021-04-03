@@ -92,6 +92,8 @@ export default function SearchAppBar({
 	setTicketsToRenderKeyword,
 	sortBy,
 	sortingOrder,
+	initialTheme,
+	setTheme,
 }) {
 	const classes = useStyles();
 
@@ -121,6 +123,8 @@ export default function SearchAppBar({
 					drawerShowed={drawerShowed}
 					setDrawerShowed={setDrawerShowed}
 					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
+					initialTheme={initialTheme}
+					setTheme={setTheme}
 				/>
 				<Toolbar>
 					<IconButton

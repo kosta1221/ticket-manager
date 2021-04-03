@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
 			fill: "darkred",
 		},
 	},
+	ticket: {
+		backgroundColor: theme.palette.ticketBackground,
+	},
 }));
 
 function Ticket({
@@ -80,7 +83,7 @@ function Ticket({
 			return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;
 		} else {
 			return (
-				<Card className="ticket done" elevation={6}>
+				<Card className={`${classes.ticket} ticket done`} elevation={6}>
 					<CardContent>
 						<HideOrShowTicketButton
 							ticketsToRenderKeyword={ticketsToRenderKeyword}
@@ -123,7 +126,7 @@ function Ticket({
 			return <Loader type="MutatingDots" color="#00BFFF" height={100} width={100} />;
 		} else {
 			return (
-				<Card className="ticket" elevation={6}>
+				<Card className={`${classes.ticket} ticket`} elevation={6}>
 					<CardContent>
 						<HideOrShowTicketButton
 							ticketsToRenderKeyword={ticketsToRenderKeyword}

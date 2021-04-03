@@ -14,11 +14,12 @@ import LabelInclusionForm from "./components/LabelsInclusionForm";
 
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+const initialTheme = createMuiTheme({
 	palette: {
 		primary: {
-			main: "#006064",
+			main: "#562500",
 		},
 		secondary: {
 			main: "#d32f2f",
@@ -26,10 +27,22 @@ const theme = createMuiTheme({
 		doneGreen: {
 			main: "green",
 		},
+		ticketBackground: "#f6f5d7",
+		background: "linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%)",
 	},
 });
 
 function App() {
+	const [theme, setTheme] = useState(initialTheme);
+
+	const useStyles = makeStyles(() => ({
+		App: {
+			background: theme.palette.background,
+		},
+	}));
+
+	const classes = useStyles();
+
 	const [allLabels, setAllLabels] = useState([]);
 	const [currentLabels, setCurrentLabels] = useState([]);
 	const [isLabelInclusion, setIsLabelInclusion] = useState(true);
@@ -234,7 +247,7 @@ function App() {
 
 	return (
 		<ThemeProvider theme={theme}>
-			<div className="App">
+			<div className={`${classes.App} App`}>
 				<SearchAppBar
 					setInput={setInput}
 					searchBy={searchBy}
@@ -243,6 +256,8 @@ function App() {
 					setTicketsToRenderKeyword={setTicketsToRenderKeyword}
 					sortBy={sortBy}
 					sortingOrder={sortingOrder}
+					initialTheme={initialTheme}
+					setTheme={setTheme}
 				/>
 				<section className="results-info-section" id="back-to-top-anchor">
 					<p>
