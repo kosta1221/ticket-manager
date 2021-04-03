@@ -11,16 +11,23 @@ import { Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import LabelIcon from "@material-ui/icons/LocalOfferOutlined";
+import LabelIconFilled from "@material-ui/icons/LocalOffer";
 
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 const useStyles = makeStyles((theme) => ({
-	label: {
-		margin: theme.spacing(0.5),
+	labelButton: {
+		margin: `${theme.spacing(0.5)}px ${theme.spacing(1)}px ${theme.spacing(0.5)}px 0`,
 		padding: 0,
 		border: "none",
 		background: "none !important",
+	},
+	labelChip: {
+		[theme.breakpoints.down(500)]: {
+			fontSize: "0.65rem",
+			height: 26,
+		},
 	},
 	noTransform: {
 		textTransform: "none",
@@ -49,6 +56,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 	dialogBottomChild: {
 		flexGrow: 1,
+	},
+	icon: {
+		[theme.breakpoints.down(500)]: {
+			display: "none",
+		},
 	},
 }));
 
@@ -93,7 +105,7 @@ function SortTicketsForm({
 				</Fab>
 			</LabelsInclusionButton>
 			<Dialog open={labelFormOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-				<DialogTitle id="form-dialog-title">Which Labels to Include / Exclude?</DialogTitle>
+				<DialogTitle id="form-dialog-title">Which Labels to Include / Exclude?🏷️</DialogTitle>
 				<DialogContent id="label-inclusion-dialogue-content">
 					<DialogContentText className={classes.dialogText}>
 						Please select if you'd like to include or exclude tickets based on labels. Then pick the
@@ -132,7 +144,7 @@ function SortTicketsForm({
 					>
 						{allLabels.map((label, i) => (
 							<ToggleButton
-								className={`${classes.label} ${classes.noTransform}`}
+								className={`${classes.labelButton} ${classes.noTransform}`}
 								key={`toggle-button-label-${i}`}
 								value={label}
 								aria-label={label}
@@ -141,9 +153,16 @@ function SortTicketsForm({
 							>
 								<Chip
 									key={`label-${i}`}
-									className="label"
+									className={`${classes.labelChip} label`}
 									label={label}
 									onClick={() => {}}
+									icon={
+										variantToRender(label) === "outlined" ? (
+											<LabelIconFilled fontSize="small" className={classes.icon} />
+										) : (
+											<LabelIcon fontSize="small" className={classes.icon} />
+										)
+									}
 									variant={variantToRender(label)}
 									color="primary"
 								></Chip>
