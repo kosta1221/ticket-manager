@@ -5,12 +5,6 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Chip from "@material-ui/core/Chip";
 
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-
-import SortIcon from "@material-ui/icons/Sort";
 import LabelsInclusionButton from "./LabelsInclusionButton";
 import { Fab } from "@material-ui/core";
 
@@ -23,10 +17,17 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup";
 
 const useStyles = makeStyles((theme) => ({
 	label: {
-		margin: theme.spacing(0.3),
+		margin: theme.spacing(0.5),
+		padding: 0,
+		border: "none",
+		background: "none !important",
 	},
 	noTransform: {
 		textTransform: "none",
+	},
+	toggled: {
+		background: `${theme.palette.primary.main} !important`,
+		color: "white",
 	},
 }));
 
@@ -61,11 +62,13 @@ function SortTicketsForm({
 				</Fab>
 			</LabelsInclusionButton>
 			<Dialog open={labelFormOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
-				<DialogTitle id="form-dialog-title">Which Labels to Include?</DialogTitle>
-				<DialogContent>
+				<DialogTitle id="form-dialog-title">Which Labels to Include / Exclude?</DialogTitle>
+				<DialogContent id="label-inclusion-dialogue-content">
 					<DialogContentText>
-						Please select the labels/tags of the tickets that you'd like to include. If none are
-						chosen, all tickets will be shown.
+						Please select if you'd like to include or exclude ticket based on labels. Then pick the
+						labels/tags of the tickets that you'd like to include / exclude. If none are chosen, all
+						tickets will be shown. Selecting every label in include mode will show only the labeled
+						tickets, while doing so in exclude mode will show only labelless tickets.
 					</DialogContentText>
 					<ToggleButtonGroup
 						value={isLabelInclusion}
@@ -92,7 +95,9 @@ function SortTicketsForm({
 								key={`toggle-button-label-${i}`}
 								value={label}
 								aria-label={label}
-								onClick={() => {}}
+								onClick={(e) => {
+									e.target.closest("DIV").classList.toggle(classes.toggled);
+								}}
 								color="primary"
 							>
 								<Chip
@@ -100,6 +105,7 @@ function SortTicketsForm({
 									className="label"
 									label={label}
 									onClick={() => {}}
+									variant="outlined"
 									color="primary"
 								></Chip>
 							</ToggleButton>
