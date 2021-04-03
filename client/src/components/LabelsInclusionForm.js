@@ -29,6 +29,20 @@ const useStyles = makeStyles((theme) => ({
 		background: `${theme.palette.primary.main} !important`,
 		color: "white",
 	},
+	labelGroup: {
+		display: "block",
+	},
+	includeExcludeGroup: {
+		display: "flex",
+		justifyContent: "space-evenly",
+		margin: "5vh 0",
+	},
+	dialogText: {
+		fontSize: "0.9rem",
+	},
+	exclusiveToggle: {
+		flexGrow: 1,
+	},
 }));
 
 function SortTicketsForm({
@@ -64,27 +78,37 @@ function SortTicketsForm({
 			<Dialog open={labelFormOpen} onClose={handleClose} aria-labelledby="form-dialog-title">
 				<DialogTitle id="form-dialog-title">Which Labels to Include / Exclude?</DialogTitle>
 				<DialogContent id="label-inclusion-dialogue-content">
-					<DialogContentText>
-						Please select if you'd like to include or exclude ticket based on labels. Then pick the
+					<DialogContentText className={classes.dialogText}>
+						Please select if you'd like to include or exclude tickets based on labels. Then pick the
 						labels/tags of the tickets that you'd like to include / exclude. If none are chosen, all
 						tickets will be shown. Selecting every label in include mode will show only the labeled
 						tickets, while doing so in exclude mode will show only labelless tickets.
 					</DialogContentText>
 					<ToggleButtonGroup
+						className={classes.includeExcludeGroup}
 						value={isLabelInclusion}
 						exclusive
 						onChange={handleInclusionOrExclusionChange}
 						aria-label="inclusion or exclusion mode"
 					>
-						<ToggleButton className={classes.noTransform} value={true} aria-label="include labels">
+						<ToggleButton
+							className={`${classes.noTransform} ${classes.exclusiveToggle}`}
+							value={true}
+							aria-label="include labels"
+						>
 							Labels to Include
 						</ToggleButton>
-						<ToggleButton className={classes.noTransform} value={false} aria-label="exclude labels">
+						<ToggleButton
+							className={`${classes.noTransform} ${classes.exclusiveToggle}`}
+							value={false}
+							aria-label="exclude labels"
+						>
 							Labels to Exclude
 						</ToggleButton>
 					</ToggleButtonGroup>
 
 					<ToggleButtonGroup
+						className={classes.labelGroup}
 						value={currentLabels}
 						onChange={handleLabelsChange}
 						aria-label="text formatting"
