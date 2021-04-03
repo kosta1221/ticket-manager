@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, CardContent, IconButton, CardActions } from "@material-ui/core";
+import { Card, CardContent, IconButton, CardActions } from "@material-ui/core";
 import { deleteTicket, toggleTicketDone } from "../utils";
 import DeleteIcon from "@material-ui/icons/Delete";
 import CheckCircle from "@material-ui/icons/CheckCircle";
@@ -9,6 +9,16 @@ import Chip from "@material-ui/core/Chip";
 import HideOrShowTicketButton from "./HideOrShowTicketButton";
 
 import Loader from "react-loader-spinner";
+
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+	negativeActionIcon: {
+		"&:hover": {
+			fill: "darkred",
+		},
+	},
+}));
 
 function Ticket({
 	ticket,
@@ -20,6 +30,8 @@ function Ticket({
 	setHiddenTickets,
 	ticketsToRenderKeyword,
 }) {
+	const classes = useStyles();
+
 	const [done, setDone] = useState(ticket.done);
 	const [ticketLoading, setTicketLoading] = useState(false);
 
@@ -96,10 +108,10 @@ function Ticket({
 						</section>
 						<CardActions disableSpacing>
 							<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
-								<DeleteIcon />
+								<DeleteIcon className={classes.negativeActionIcon} />
 							</IconButton>
 							<IconButton aria-label="mark as undone" onClick={handleDoneToggle}>
-								<MarkAsUndoneIcon />
+								<MarkAsUndoneIcon className={classes.negativeActionIcon} />
 							</IconButton>
 						</CardActions>
 					</CardContent>
@@ -139,10 +151,10 @@ function Ticket({
 						</section>
 						<CardActions disableSpacing>
 							<IconButton aria-label="delete ticket" onClick={handleDeleteTicket}>
-								<DeleteIcon />
+								<DeleteIcon style={{ color: "darkred" }} />
 							</IconButton>
 							<IconButton aria-label="mark as done" onClick={handleDoneToggle}>
-								<CheckCircle />
+								<CheckCircle style={{ color: "green" }} />
 							</IconButton>
 						</CardActions>
 					</CardContent>
