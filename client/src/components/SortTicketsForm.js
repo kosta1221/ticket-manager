@@ -20,6 +20,13 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
+		flexGrow: 1,
+	},
+	selectsDiv: {
+		display: "flex",
+		[theme.breakpoints.down(500)]: {
+			flexDirection: "column",
+		},
 	},
 }));
 
@@ -76,38 +83,40 @@ function SortTicketsForm({
 						Please select your preferred sorting order for the tickets. It will not impact them,
 						just change the order in which they'll be shown on your screen.
 					</DialogContentText>
-					<FormControl className={classes.formControl}>
-						<InputLabel shrink id="sort-by-select-label">
-							Sort By...
-						</InputLabel>
-						<Select
-							labelId="sort-by-select-label"
-							id="sort-by-select"
-							value={sortBy}
-							onChange={handleSortBySelectChange}
-							displayEmpty
-						>
-							<MenuItem value={"date"}>Date</MenuItem>
-							<MenuItem value={"title"}>Title</MenuItem>
-							<MenuItem value={"userEmail"}>Author's Email</MenuItem>
-							<MenuItem value={"content"}>Content</MenuItem>
-						</Select>
-					</FormControl>
-					<FormControl className={classes.formControl}>
-						<InputLabel shrink id="order-select-label">
-							{`Order...${sortingOrderAddedWord}`}
-						</InputLabel>
-						<Select
-							labelId="order-select-label"
-							id="order-select"
-							value={sortingOrder}
-							onChange={handleSortingOrderSelectChange}
-							displayEmpty
-						>
-							<MenuItem value={"ascending"}>Ascending</MenuItem>
-							<MenuItem value={"descending"}>Descending</MenuItem>
-						</Select>
-					</FormControl>
+					<div className={classes.selectsDiv}>
+						<FormControl className={classes.formControl}>
+							<InputLabel shrink id="sort-by-select-label">
+								Sort By...
+							</InputLabel>
+							<Select
+								labelId="sort-by-select-label"
+								id="sort-by-select"
+								value={sortBy}
+								onChange={handleSortBySelectChange}
+								displayEmpty
+							>
+								<MenuItem value={"date"}>Date</MenuItem>
+								<MenuItem value={"title"}>Title</MenuItem>
+								<MenuItem value={"userEmail"}>Author's Email</MenuItem>
+								<MenuItem value={"content"}>Content</MenuItem>
+							</Select>
+						</FormControl>
+						<FormControl className={classes.formControl}>
+							<InputLabel shrink id="order-select-label">
+								{`Order...${sortingOrderAddedWord}`}
+							</InputLabel>
+							<Select
+								labelId="order-select-label"
+								id="order-select"
+								value={sortingOrder}
+								onChange={handleSortingOrderSelectChange}
+								displayEmpty
+							>
+								<MenuItem value={"ascending"}>Ascending</MenuItem>
+								<MenuItem value={"descending"}>Descending</MenuItem>
+							</Select>
+						</FormControl>
+					</div>
 				</DialogContent>
 				<DialogActions>
 					<Button onClick={handleClose} color="primary">
