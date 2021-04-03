@@ -43,6 +43,13 @@ const useStyles = makeStyles((theme) => ({
 	exclusiveToggle: {
 		flexGrow: 1,
 	},
+	dialogBottom: {
+		display: "flex",
+		margin: "2vh 0",
+	},
+	dialogBottomChild: {
+		flexGrow: 1,
+	},
 }));
 
 function SortTicketsForm({
@@ -66,6 +73,16 @@ function SortTicketsForm({
 
 	const handleLabelsChange = (event, newLabels) => {
 		setCurrentLabels(newLabels);
+	};
+
+	const handleSelectNone = () => {
+		setCurrentLabels([]);
+	};
+
+	const variantToRender = (label) => {
+		if (currentLabels.includes(label)) {
+			return "default";
+		} else return "outlined";
 	};
 
 	return (
@@ -119,9 +136,7 @@ function SortTicketsForm({
 								key={`toggle-button-label-${i}`}
 								value={label}
 								aria-label={label}
-								onClick={(e) => {
-									e.target.closest("DIV").classList.toggle(classes.toggled);
-								}}
+								onClick={() => {}}
 								color="primary"
 							>
 								<Chip
@@ -129,12 +144,23 @@ function SortTicketsForm({
 									className="label"
 									label={label}
 									onClick={() => {}}
-									variant="outlined"
+									variant={variantToRender(label)}
 									color="primary"
 								></Chip>
 							</ToggleButton>
 						))}
 					</ToggleButtonGroup>
+					<div className={classes.dialogBottom}>
+						<Chip
+							className={`label ${classes.dialogBottomChild}`}
+							label="Select None"
+							onClick={() => {
+								handleSelectNone();
+							}}
+							variant="outlined"
+							color="secondary"
+						></Chip>
+					</div>
 				</DialogContent>
 			</Dialog>
 		</div>
