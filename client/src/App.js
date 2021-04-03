@@ -73,6 +73,7 @@ function App() {
 						.filter(
 							(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
 						)
+						.sort()
 				);
 			}
 		});
@@ -98,6 +99,7 @@ function App() {
 							.filter(
 								(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
 							)
+							.sort()
 					);
 				}
 			});
@@ -131,6 +133,18 @@ function App() {
 			setTicketsToRender(hiddenTickets.filter((hiddenTicket) => ticketLabelCheck(hiddenTicket)));
 		}
 	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabels, isLabelInclusion]);
+
+	useEffect(() => {
+		setAllLabels(
+			Array.prototype.concat
+				.apply(
+					[],
+					tickets.map((ticket) => ticket.labels)
+				)
+				.filter((label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i)
+				.sort()
+		);
+	}, [tickets]);
 
 	useEffect(() => {
 		if (hideTicketsCounter === 0) {
