@@ -248,9 +248,6 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<div className={`${classes.App} App`}>
-				<div>
-					<p>adfgdfgdfg</p>
-				</div>
 				<SearchAppBar
 					setInput={setInput}
 					searchBy={searchBy}
