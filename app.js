@@ -57,6 +57,11 @@ app.patch("/api/tickets/:ticketId/:state", (req, res, next) => {
 
 	Ticket.findById(ticketId)
 		.then((ticket) => {
+			// 404 are not errors here, axios will throw errors to frontend upon receiving 404, which is why this isn't in the error handler.
+			if (!ticket) {
+				return res.status(404).send();
+			}
+
 			let toUpdateOrNot = true;
 
 			if ((ticket.done && state === "done") || (!ticket.done && state === "undone")) {
@@ -108,6 +113,12 @@ app.delete("/api/tickets/:ticketId", (req, res, next) => {
 
 	Ticket.findByIdAndRemove(ticketId)
 		.then((deletedTicket) => {
+			// 404 are not errors here, axios will throw errors to frontend upon receiving 404, which is why this isn't in the error handler.
+			// Also I intended not to handle the 404 case in delete by design (not found -> not deleted -> no problem), did it anyway because I do get the deleted ticket if it in fact was deleted so now there's a distinction between these 2 cases.
+			if (!ticket) {
+				return res.status(404).send();
+			}
+
 			res.json({ message: `ticket with id ${ticketId} deleted` });
 		})
 		.catch((error) => {
@@ -120,19 +131,19 @@ const errorHandler = (error, request, response, next) => {
 	console.error(error.message);
 
 	if (error.name === "CastError") {
-		return response.status(400).send({ message: "invalid id format!", name: "CastError" });
+		return response.status(400).json({ message: "invalid id format!", name: "CastError" });
 	}
 
 	if (error.name === "ValidationError") {
-		return response.status(400).json({ message: error.message, name: "CastError" });
+		return response.status(400).json({ message: error.message, name: "ValidationError" });
 	}
 
 	if (error.name === "MongoError") {
-		return response.status(400).json({ message: error.message, name: "CastError" });
+		return response.status(400).json({ message: error.message, name: "MongoError" });
 	}
 
 	if (error.name === "BadStateParamError") {
-		return response.status(400).json({ message: error.message, name: "CastError" });
+		return response.status(400).json({ message: error.message, name: "BadStateParamError" });
 	}
 
 	next(error);
