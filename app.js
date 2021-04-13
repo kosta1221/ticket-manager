@@ -115,7 +115,7 @@ app.delete("/api/tickets/:ticketId", (req, res, next) => {
 		.then((deletedTicket) => {
 			// 404 are not errors here, axios will throw errors to frontend upon receiving 404, which is why this isn't in the error handler.
 			// Also I intended not to handle the 404 case in delete by design (not found -> not deleted -> no problem), did it anyway because I do get the deleted ticket if it in fact was deleted so now there's a distinction between these 2 cases.
-			if (!ticket) {
+			if (!deletedTicket) {
 				return res.status(404).send();
 			}
 
