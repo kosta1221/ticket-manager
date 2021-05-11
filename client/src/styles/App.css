@@ -1,0 +1,167 @@
+.ticket {
+  padding: 1% 3%;
+  margin: 2vmax 7%;
+  position: relative;
+  text-align: left;
+}
+
+.ticket .hideTicketButton {
+  position: absolute;
+  top: 1.5vw;
+  left: 94%;
+}
+
+.ticket h2 {
+  margin-top: 0;
+  padding-right: 10%;
+}
+
+.ticket p {
+  text-align: left;
+}
+
+.ticket .info-section {
+  padding: 0 2% 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.ticket .info-section p {
+  font-size: 0.85rem;
+  color: grey;
+}
+
+.ticket .info-section div {
+  display: block;
+  float: right;
+  max-width: 45vw;
+  overflow-x: auto;
+}
+
+.ticket .info-section .label {
+  margin: 0.3vw;
+  font-size: 0.85rem;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+}
+
+.ticket .info-section .label span {
+  text-transform: none;
+}
+
+.done {
+  background-color: green !important;
+  color: white !important;
+}
+
+.done .info-section p {
+  color: white;
+}
+
+@media only screen and (max-width: 950px) {
+  .ticket .hideTicketButton {
+    left: 92.5%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .ticket .hideTicketButton {
+    left: 90.5%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .ticket .hideTicketButton {
+    left: 89%;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .ticket .hideTicketButton {
+    left: 87%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .ticket .hideTicketButton {
+    left: 82.5%;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .ticket .hideTicketButton {
+    left: 76.5%;
+  }
+}
+
+.search-app-bar .viewChip {
+  margin: 0 0.8vw;
+}
+
+@media only screen and (max-width: 700px) {
+  .search-app-bar .viewChip {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .search-app-bar .sortChip {
+    display: none;
+  }
+}
+
+.App {
+  text-align: center;
+  font-size: 16px;
+  min-height: 100vh;
+  padding-bottom: 0.2vh;
+  background: linear-gradient(90.5deg, #fcb045 0%, #f3f463 100%);
+}
+
+.App .results-info-section p #sorted-by-info {
+  display: none;
+}
+
+@media only screen and (max-width: 900px) {
+  .App .results-info-section p {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .App .results-info-section p #sorted-by-info {
+    display: inline;
+  }
+}
+
+.App .MuiFormControl-root {
+  min-width: 15%;
+  margin-top: 0;
+  margin-left: 3vw;
+  margin-right: 0;
+}
+
+.App .MuiFormControl-root label {
+  color: lightgrey;
+  font-size: 0.85rem;
+}
+
+.App .MuiFormControl-root div {
+  color: white;
+}
+
+.MuiPaper-root {
+  background-color: #fff;
+}
+/*# sourceMappingURL=App.css.map */
