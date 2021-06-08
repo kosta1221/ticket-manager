@@ -42,7 +42,7 @@ function Ticket({
 		setDone(ticket.done);
 	}, [ticket]);
 
-	const creationTime = new Date(ticket.creationTime).toLocaleString();
+	const creationTime = new Date(ticket.date).toLocaleString();
 
 	const handleHideTicketClick = (event) => {
 		console.log("ticket to hide:", ticket);
@@ -94,7 +94,7 @@ function Ticket({
 						<p>{ticket.content}</p>
 						<section className="info-section">
 							<p>
-								By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
+								By <span>{ticket.author}</span> | <span>{creationTime}</span>
 							</p>
 
 							<div>
@@ -137,7 +137,7 @@ function Ticket({
 						<p>{ticket.content}</p>
 						<section className="info-section">
 							<p>
-								By <span>{ticket.userEmail}</span> | <span>{creationTime}</span>
+								By <span>{ticket.author}</span> | <span>{creationTime}</span>
 							</p>
 
 							<div>

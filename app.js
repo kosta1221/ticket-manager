@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-const Ticket = require("./models/Ticket");
+const SinglePaste = require("./models/SinglePaste");
 
 morgan.token("reqbody", (req) => {
 	return JSON.stringify(req.body);
@@ -17,11 +17,7 @@ app.get("/api/tickets", (req, res, next) => {
 	const searchText = req.query.searchText;
 	let propToSearchBy = req.query.searchBy;
 
-	if (
-		propToSearchBy !== "title" &&
-		propToSearchBy !== "content" &&
-		propToSearchBy !== "userEmail"
-	) {
+	if (propToSearchBy !== "title" && propToSearchBy !== "content" && propToSearchBy !== "author") {
 		// default
 		propToSearchBy = "title";
 	}
@@ -31,7 +27,7 @@ app.get("/api/tickets", (req, res, next) => {
 	const query = {};
 	query[propToSearchBy] = searchTextRegex;
 
-	Ticket.find(query)
+	SinglePaste.find(query)
 		.then((tickets) => {
 			res.json(tickets);
 		})
@@ -55,7 +51,7 @@ app.patch("/api/tickets/:ticketId/:state", (req, res, next) => {
 		next(error);
 	}
 
-	Ticket.findById(ticketId)
+	SinglePaste.findById(ticketId)
 		.then((ticket) => {
 			// 404 are not errors here, axios will throw errors to frontend upon receiving 404, which is why this isn't in the error handler.
 			if (!ticket) {
@@ -98,7 +94,7 @@ app.post("/api/tickets/new", (req, res, next) => {
 	const creationTime = Date.now();
 	const newTicket = { ...body, creationTime };
 
-	Ticket.create(newTicket)
+	SinglePaste.create(newTicket)
 		.then(() => {
 			res.status(201).json(newTicket);
 		})
@@ -111,7 +107,7 @@ app.post("/api/tickets/new", (req, res, next) => {
 app.delete("/api/tickets/:ticketId", (req, res, next) => {
 	const { ticketId } = req.params;
 
-	Ticket.findByIdAndRemove(ticketId)
+	SinglePaste.findByIdAndRemove(ticketId)
 		.then((deletedTicket) => {
 			// 404 are not errors here, axios will throw errors to frontend upon receiving 404, which is why this isn't in the error handler.
 			// Also I intended not to handle the 404 case in delete by design (not found -> not deleted -> no problem), did it anyway because I do get the deleted ticket if it in fact was deleted so now there's a distinction between these 2 cases.
