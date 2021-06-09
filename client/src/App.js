@@ -2,7 +2,7 @@ import "./styles/App.css";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 import { useEffect, useState, useRef } from "react";
-import { fetchTickets } from "./utils";
+import { fetchTicketsDebounced } from "./utils";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import { Fab } from "@material-ui/core";
 import Tickets from "./components/Tickets";
@@ -75,7 +75,7 @@ function App() {
 	// This useEffect runs on changes to input, searchBy. it fetches the tickets from database, and sorts them according to sortingOrder and sortBy.
 	useEffect(() => {
 		setTicketsLoading(true);
-		fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
+		fetchTicketsDebounced(setTickets, input, searchBy).then((fetchedTickets) => {
 			setTicketsLoading(false);
 
 			if (fetchedTickets) {
@@ -100,7 +100,7 @@ function App() {
 		if (!addFormOpen && addFormPosted) {
 			setTicketsLoading(true);
 
-			fetchTickets(setTickets, input, searchBy).then((fetchedTickets) => {
+			fetchTicketsDebounced(setTickets, input, searchBy).then((fetchedTickets) => {
 				setTicketsLoading(false);
 				setAddFormPosted(false);
 

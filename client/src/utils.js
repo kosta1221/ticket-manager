@@ -1,4 +1,8 @@
 import axios from "axios";
+
+import AwesomeDebouncePromise from "awesome-debounce-promise";
+import useConstant from "use-constant";
+
 export const URL = `/api`;
 
 export const fetchTickets = async (setTickets, inputValue, searchBy) => {
@@ -23,6 +27,8 @@ export const fetchTickets = async (setTickets, inputValue, searchBy) => {
 		console.log(e);
 	}
 };
+
+export const fetchTicketsDebounced = AwesomeDebouncePromise(fetchTickets, 400);
 
 export const deleteTicket = async (ticketId, tickets, setTickets) => {
 	console.log(`trying to delete ticket id ${ticketId}...`);
