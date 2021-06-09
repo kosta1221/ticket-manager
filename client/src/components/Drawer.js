@@ -10,8 +10,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import InboxIcon from "@material-ui/icons/MoveToInbox";
-import CheckCircle from "@material-ui/icons/CheckCircle";
-import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 import PaletteIcon from "@material-ui/icons/Palette";
 
@@ -64,7 +64,7 @@ function Drawer({
 			onKeyDown={toggleDrawer(false)}
 		>
 			<List>
-				{["All Tickets", "Done", "Undone"].map((text, index) => (
+				{["All Pastes", "Favorites", "Exclude Favorites"].map((text, index) => (
 					<ListItem
 						button
 						key={text}
@@ -77,9 +77,9 @@ function Drawer({
 							{index % 3 === 0 ? (
 								<InboxIcon />
 							) : index % 2 === 0 ? (
-								<MarkAsUndoneIcon />
+								<NotInterestedIcon />
 							) : (
-								<CheckCircle />
+								<FavoriteIcon />
 							)}
 						</ListItemIcon>
 						<ListItemText primary={text} />
@@ -88,7 +88,7 @@ function Drawer({
 			</List>
 			<Divider />
 			<List>
-				{["Hidden Tickets"].map((text, index) => (
+				{["Hidden Pastes"].map((text, index) => (
 					<ListItem
 						button
 						key={text}

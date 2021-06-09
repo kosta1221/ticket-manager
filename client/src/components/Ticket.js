@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Card, CardContent, IconButton, CardActions } from "@material-ui/core";
 import { deleteTicket, toggleTicketDone } from "../utils";
 import DeleteIcon from "@material-ui/icons/Delete";
-import CheckCircle from "@material-ui/icons/CheckCircle";
-import MarkAsUndoneIcon from "@material-ui/icons/HighlightOff";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import NotInterestedIcon from "@material-ui/icons/NotInterested";
 import Chip from "@material-ui/core/Chip";
 
 import HideOrShowTicketButton from "./HideOrShowTicketButton";
@@ -114,7 +114,7 @@ function Ticket({
 								<DeleteIcon className={classes.negativeActionIcon} />
 							</IconButton>
 							<IconButton aria-label="mark as undone" onClick={handleDoneToggle}>
-								<MarkAsUndoneIcon className={classes.negativeActionIcon} />
+								<NotInterestedIcon className={classes.negativeActionIcon} />
 							</IconButton>
 						</CardActions>
 					</CardContent>
@@ -157,7 +157,7 @@ function Ticket({
 								<DeleteIcon style={{ color: "darkred" }} />
 							</IconButton>
 							<IconButton aria-label="mark as done" onClick={handleDoneToggle}>
-								<CheckCircle style={{ color: "green" }} />
+								<FavoriteIcon style={{ color: "green" }} />
 							</IconButton>
 						</CardActions>
 					</CardContent>

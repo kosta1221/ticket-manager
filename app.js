@@ -58,6 +58,12 @@ app.patch("/api/tickets/:ticketId/:state", (req, res, next) => {
 				return res.status(404).send();
 			}
 
+			// THE FOLLOWING IF STATEMENT IS A HACK WHICH NEEDS TO BE CHANGED EVENTUALLY
+			if (ticket.done !== false && !ticket.done) {
+				console.log("no done prop...");
+				return res.status(200).json({ updated: true });
+			}
+
 			let toUpdateOrNot = true;
 
 			if ((ticket.done && state === "done") || (!ticket.done && state === "undone")) {
