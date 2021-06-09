@@ -65,7 +65,7 @@ function App() {
 	const [ticketsToRenderKeyword, setTicketsToRenderKeyword] = useState("all");
 	const [ticketsLoading, setTicketsLoading] = useState(true);
 	const [sortBy, setSortBy] = useState("date");
-	const [sortingOrder, setSortingOrder] = useState("ascending");
+	const [sortingOrder, setSortingOrder] = useState("descending");
 
 	const hiddenTicketsInfo = useRef(null);
 	const labelModeKeyword = isLabelInclusion ? "including" : "excluding";
@@ -186,14 +186,20 @@ function App() {
 				// Sort by creation date ascending
 				setTickets([
 					...ticketsToSort.sort((a, b) => {
-						return a.creationTime - b.creationTime;
+						const aDate = new Date(a.date);
+						const bDate = new Date(b.date);
+
+						return aDate.getTime() - bDate.getTime();
 					}),
 				]);
 			} else if (sortingOrder === "descending") {
 				// Sort by creation date descending
 				setTickets([
 					...ticketsToSort.sort((a, b) => {
-						return b.creationTime - a.creationTime;
+						const aDate = new Date(a.date);
+						const bDate = new Date(b.date);
+
+						return bDate.getTime() - aDate.getTime();
 					}),
 				]);
 			}
