@@ -138,7 +138,7 @@ export default function SearchAppBar({
 					</IconButton>
 
 					<Typography className={classes.title} variant="h6" noWrap>
-						Kosta's Ticket Manager
+						Kosta's Dark Net Updates
 					</Typography>
 
 					<Chip

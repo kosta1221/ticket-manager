@@ -106,7 +106,7 @@ function Drawer({
 				<ListItem>
 					<ListItemText primary="- Pick a theme!" />
 				</ListItem>
-				{["Orangey Oranges", "Bluey Blues"].map((text, index) => (
+				{["Black & Green", "Bluey Blues"].map((text, index) => (
 					<ListItem
 						button
 						key={text}

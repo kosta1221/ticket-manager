@@ -19,7 +19,7 @@ import { makeStyles } from "@material-ui/core/styles";
 const initialTheme = createMuiTheme({
 	palette: {
 		primary: {
-			main: "#562500",
+			main: "#006700",
 		},
 		secondary: {
 			main: "#d32f2f",
@@ -27,8 +27,8 @@ const initialTheme = createMuiTheme({
 		doneGreen: {
 			main: "green",
 		},
-		ticketBackground: "#f6f5d7",
-		background: "linear-gradient(90.5deg, rgba(252, 176, 69, 1) 0%, rgba(243, 244, 99, 1) 100%)",
+		ticketBackground: "#d3d3d3",
+		background: "#000",
 	},
 });
 
