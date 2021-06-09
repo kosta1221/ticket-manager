@@ -193,7 +193,7 @@ export default function SearchAppBar({
 								<em>Title</em>
 							</MenuItem>
 							<MenuItem value={"content"}>Content</MenuItem>
-							<MenuItem value={"userEmail"}>Author's E-mail</MenuItem>
+							<MenuItem value={"author"}>Author</MenuItem>
 						</Select>
 					</FormControl>
 				</Toolbar>

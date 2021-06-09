@@ -1,7 +1,6 @@
 import axios from "axios";
 
 import AwesomeDebouncePromise from "awesome-debounce-promise";
-import useConstant from "use-constant";
 
 export const URL = `/api`;
 

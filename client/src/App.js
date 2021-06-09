@@ -201,14 +201,14 @@ function App() {
 		}
 
 		if (sortingOrder === "ascending") {
-			// Sort by ascending order alphabetically according to prop passed (either title, content or userEmail)
+			// Sort by ascending order alphabetically according to prop passed (either title, content or author)
 			setTickets([
 				...tickets.sort((a, b) => {
 					return a[sortBy].toLowerCase().localeCompare(b[sortBy].toLowerCase());
 				}),
 			]);
 		} else if (sortingOrder === "descending") {
-			// Sort by descending order alphabetically according to prop passed (either title, content or userEmail)
+			// Sort by descending order alphabetically according to prop passed (either title, content or author)
 			setTickets([
 				...tickets.sort((a, b) => {
 					return b[sortBy].toLowerCase().localeCompare(a[sortBy].toLowerCase());

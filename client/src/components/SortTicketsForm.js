@@ -42,7 +42,7 @@ function SortTicketsForm({
 }) {
 	const classes = useStyles();
 
-	// This is a textual cue for explaining that descending/ascending by title/userEmail/content means alphabetical descending/ascending, and it is added to the select's label
+	// This is a textual cue for explaining that descending/ascending by title/author/content means alphabetical descending/ascending, and it is added to the select's label
 	const [sortingOrderAddedWord, setSortingOrderAddedWord] = useState("");
 
 	const handleClose = () => {
@@ -52,7 +52,7 @@ function SortTicketsForm({
 	const handleSortBySelectChange = (event) => {
 		setSortBy(event.target.value);
 
-		// This is a textual cue for explaining that descending/ascending by title/userEmail/content means alphabetical descending/ascending, and it is added to the select's label
+		// This is a textual cue for explaining that descending/ascending by title/author/content means alphabetical descending/ascending, and it is added to the select's label
 		if (event.target.value === "date") {
 			setSortingOrderAddedWord("");
 		} else {
@@ -97,7 +97,7 @@ function SortTicketsForm({
 							>
 								<MenuItem value={"date"}>Date</MenuItem>
 								<MenuItem value={"title"}>Title</MenuItem>
-								<MenuItem value={"userEmail"}>Author's Email</MenuItem>
+								<MenuItem value={"author"}>Author</MenuItem>
 								<MenuItem value={"content"}>Content</MenuItem>
 							</Select>
 						</FormControl>
