@@ -92,7 +92,7 @@ function SortTicketsForm({
 	};
 
 	const variantToRender = (label) => {
-		if (currentLabels.includes(label)) {
+		if (currentLabels.includes(label?.text)) {
 			return "default";
 		} else return "outlined";
 	};

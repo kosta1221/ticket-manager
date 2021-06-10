@@ -102,7 +102,7 @@ function Ticket({
 									<Chip
 										key={`label-${i}`}
 										className="label"
-										label={label}
+										label={label.text}
 										onClick={() => {}}
 										color="primary"
 									></Chip>
@@ -145,7 +145,7 @@ function Ticket({
 									<Chip
 										key={`label-${i}`}
 										className="label"
-										label={label}
+										label={label.text}
 										onClick={() => {}}
 										color="primary"
 									></Chip>

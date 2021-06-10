@@ -84,7 +84,21 @@ function App() {
 					Array.prototype.concat
 						.apply(
 							[],
-							fetchedTickets.map((ticket) => ticket.labels)
+							fetchedTickets
+								.map((ticket) => {
+									if (ticket.labels) {
+										if (ticket.labels.length === 0) {
+											return null;
+										}
+
+										const labelTexts = ticket.labels.map((label) => label.text);
+										console.log(ticket);
+										console.log("label texts: ", labelTexts);
+										return labelTexts;
+									}
+									return null;
+								})
+								.filter((labelTexts) => labelTexts != null)
 						)
 						.filter(
 							(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
@@ -233,7 +247,8 @@ function App() {
 		if (isLabelInclusion) {
 			// If mode is inclusion based on labels, if ticket's labels includes any of the current labels, it'll pass the check.
 			for (const label of currentLabels) {
-				if (ticket.labels.includes(label)) {
+				console.log(currentLabels);
+				if (ticket.labels && ticket.labels.includes(label)) {
 					return true;
 				}
 			}
@@ -242,7 +257,7 @@ function App() {
 		} else {
 			// If mode is exclusion based on labels, if ticket's labels includes any of the current labels, it'll fail the check. only if it includes none of the excluded/blacklisted labels it'll pass.
 			for (const label of currentLabels) {
-				if (ticket.labels.includes(label)) {
+				if (ticket.labels && ticket.labels.includes(label)) {
 					return false;
 				}
 			}
