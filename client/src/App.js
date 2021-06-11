@@ -39,12 +39,15 @@ function App() {
 		App: {
 			background: theme.palette.background,
 		},
+		resultsSpan: {
+			color: "white",
+		},
 	}));
 
 	const classes = useStyles();
 
 	const [allLabels, setAllLabels] = useState([]);
-	const [currentLabels, setCurrentLabels] = useState([]);
+	const [currentLabelsTexts, setCurrentLabelsTexts] = useState([]);
 	const [isLabelInclusion, setIsLabelInclusion] = useState(true);
 
 	const [addFormOpen, setAddFormOpen] = useState(false);
@@ -70,7 +73,9 @@ function App() {
 	const hiddenTicketsInfo = useRef(null);
 	const labelModeKeyword = isLabelInclusion ? "including" : "excluding";
 	const labelModeLengthKeyword =
-		isLabelInclusion && currentLabels.length === 0 ? "all" : currentLabels.length;
+		isLabelInclusion && currentLabelsTexts.length === 0 ? "all" : currentLabelsTexts.length;
+	console.log("all labels: ", allLabels);
+	console.log("current labels: ", currentLabelsTexts);
 
 	// This useEffect runs on changes to input, searchBy. it fetches the tickets from database, and sorts them according to sortingOrder and sortBy.
 	useEffect(() => {
@@ -94,11 +99,11 @@ function App() {
 										const labelTexts = ticket.labels.map((label) => label.text);
 										console.log(ticket);
 										console.log("label texts: ", labelTexts);
-										return labelTexts;
+										return ticket.labels;
 									}
 									return null;
 								})
-								.filter((labelTexts) => labelTexts != null)
+								.filter((label) => label != null)
 						)
 						.filter(
 							(label, i, allLabelsWithDuplicates) => allLabelsWithDuplicates.indexOf(label) === i
@@ -162,7 +167,7 @@ function App() {
 		} else if (ticketsToRenderKeyword === "hidden") {
 			setTicketsToRender(hiddenTickets.filter((hiddenTicket) => ticketLabelCheck(hiddenTicket)));
 		}
-	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabels, isLabelInclusion]);
+	}, [ticketsToRenderKeyword, tickets, hiddenTickets, currentLabelsTexts, isLabelInclusion]);
 
 	useEffect(() => {
 		setAllLabels(
@@ -240,15 +245,15 @@ function App() {
 	// A function for checking wheter to render a ticket or not based on included labels.
 	const ticketLabelCheck = (ticket) => {
 		// If no labels are selected for inclusion, I want to show all of the tickets.
-		if (currentLabels.length === 0) {
+		if (currentLabelsTexts.length === 0) {
 			return true;
 		}
 
 		if (isLabelInclusion) {
 			// If mode is inclusion based on labels, if ticket's labels includes any of the current labels, it'll pass the check.
-			for (const label of currentLabels) {
-				console.log(currentLabels);
-				if (ticket.labels && ticket.labels.includes(label)) {
+			for (const labelText of currentLabelsTexts) {
+				console.log(currentLabelsTexts);
+				if (ticket.labels && ticket.labels.find((foundLabel) => foundLabel.text === labelText)) {
 					return true;
 				}
 			}
@@ -256,8 +261,8 @@ function App() {
 			return false;
 		} else {
 			// If mode is exclusion based on labels, if ticket's labels includes any of the current labels, it'll fail the check. only if it includes none of the excluded/blacklisted labels it'll pass.
-			for (const label of currentLabels) {
-				if (ticket.labels && ticket.labels.includes(label)) {
+			for (const labelText of currentLabelsTexts) {
+				if (ticket.labels && ticket.labels.find((foundLabel) => foundLabel.text === labelText)) {
 					return false;
 				}
 			}
@@ -281,7 +286,7 @@ function App() {
 					setTheme={setTheme}
 				/>
 				<section className="results-info-section" id="back-to-top-anchor">
-					<p>
+					<p className={classes.resultsSpan}>
 						<span>
 							<span>{`Showing ${resultsCount} results, viewing ${ticketsToRenderKeyword}, ${labelModeKeyword} ${labelModeLengthKeyword} labels `}</span>
 							<span ref={hiddenTicketsInfo}>
@@ -315,8 +320,8 @@ function App() {
 					labelFormOpen={labelFormOpen}
 					setLabelFormOpen={setLabelFormOpen}
 					allLabels={allLabels}
-					currentLabels={currentLabels}
-					setCurrentLabels={setCurrentLabels}
+					currentLabelsTexts={currentLabelsTexts}
+					setCurrentLabelsTexts={setCurrentLabelsTexts}
 					isLabelInclusion={isLabelInclusion}
 					setIsLabelInclusion={setIsLabelInclusion}
 				/>

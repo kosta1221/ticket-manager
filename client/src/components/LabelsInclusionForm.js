@@ -68,8 +68,8 @@ function SortTicketsForm({
 	labelFormOpen,
 	setLabelFormOpen,
 	allLabels,
-	currentLabels,
-	setCurrentLabels,
+	currentLabelsTexts,
+	setCurrentLabelsTexts,
 	isLabelInclusion,
 	setIsLabelInclusion,
 }) {
@@ -83,16 +83,16 @@ function SortTicketsForm({
 		setIsLabelInclusion(newMode);
 	};
 
-	const handleLabelsChange = (event, newLabels) => {
-		setCurrentLabels(newLabels);
+	const handleLabelsChange = (event, newLabelsTexts) => {
+		setCurrentLabelsTexts(newLabelsTexts);
 	};
 
 	const handleSelectNone = () => {
-		setCurrentLabels([]);
+		setCurrentLabelsTexts([]);
 	};
 
 	const variantToRender = (label) => {
-		if (currentLabels.includes(label?.text)) {
+		if (currentLabelsTexts.find((foundLabelText) => label.text === foundLabelText)) {
 			return "default";
 		} else return "outlined";
 	};
@@ -138,7 +138,7 @@ function SortTicketsForm({
 
 					<ToggleButtonGroup
 						className={classes.labelGroup}
-						value={currentLabels}
+						value={currentLabelsTexts}
 						onChange={handleLabelsChange}
 						aria-label="text formatting"
 					>
@@ -146,15 +146,15 @@ function SortTicketsForm({
 							<ToggleButton
 								className={`${classes.labelButton} ${classes.noTransform}`}
 								key={`toggle-button-label-${i}`}
-								value={label}
-								aria-label={label}
+								value={label?.text}
+								aria-label={label?.text}
 								onClick={() => {}}
 								color="primary"
 							>
 								<Chip
 									key={`label-${i}`}
 									className={`${classes.labelChip} label`}
-									label={label}
+									label={label?.text}
 									onClick={() => {}}
 									icon={
 										variantToRender(label) === "outlined" ? (
